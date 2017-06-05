@@ -1,39 +1,12 @@
 import React from 'react';
+import IncomeTotal from './IncomeTotal';
 import IncomeCategory from './IncomeCategory';
 
 const IncomeBody = () => (
 
   <tbody>
 
-    {/* Income Total */}
-    <tr>
-      <th></th>
-      <th>0</th>
-      <th>0</th>
-      <th>0</th>
-      <th>0</th>
-      <th>0</th>
-      <th>0</th>
-      <th>0</th>
-      <th>0</th>
-      <th>0</th>
-      <th>0</th>
-      <th>0</th>
-      <th>0</th>
-      <th>0</th>
-      <th>0</th>
-      <th>0</th>
-      <th>0</th>
-      <th>0</th>
-      <th>0</th>
-      <th>0</th>
-      <th>0</th>
-      <th>0</th>
-      <th>0</th>
-      <th>0</th>
-      <th>0</th>
-    </tr>
-
+    <IncomeTotal />
     <IncomeCategory name="Salary" />
     <IncomeCategory name="Deposit" />
 

@@ -1,39 +1,12 @@
 import React from 'react';
+import OutgoTotal from './OutgoTotal';
 import OutgoCategory from './OutgoCategory';
 
 const OutgoBody = () => (
 
     <tbody>
 
-      {/* Outgo Total */}
-      <tr>
-        <th></th>
-        <th>0</th>
-        <th>0</th>
-        <th>0</th>
-        <th>0</th>
-        <th>0</th>
-        <th>0</th>
-        <th>0</th>
-        <th>0</th>
-        <th>0</th>
-        <th>0</th>
-        <th>0</th>
-        <th>0</th>
-        <th>0</th>
-        <th>0</th>
-        <th>0</th>
-        <th>0</th>
-        <th>0</th>
-        <th>0</th>
-        <th>0</th>
-        <th>0</th>
-        <th>0</th>
-        <th>0</th>
-        <th>0</th>
-        <th>0</th>
-      </tr>
-
+      <OutgoTotal />
       <OutgoCategory name="Food" />
       <OutgoCategory name="Car" />
       <OutgoCategory name="Dogs" />
