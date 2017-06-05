@@ -1,4 +1,5 @@
 import React from 'react';
+import OutgoCategory from './OutgoCategory';
 
 const OutgoBody = () => (
 
@@ -33,34 +34,9 @@ const OutgoBody = () => (
         <th>0</th>
       </tr>
 
-      {/* Outgo Category: Food */}
-      <tr>
-        <td>Food</td>
-        <td>0</td>
-        <td>0</td>
-        <td>0</td>
-        <td>0</td>
-        <td>0</td>
-        <td>0</td>
-        <td>0</td>
-        <td>0</td>
-        <td>0</td>
-        <td>0</td>
-        <td>0</td>
-        <td>0</td>
-        <td>0</td>
-        <td>0</td>
-        <td>0</td>
-        <td>0</td>
-        <td>0</td>
-        <td>0</td>
-        <td>0</td>
-        <td>0</td>
-        <td>0</td>
-        <td>0</td>
-        <td>0</td>
-        <td>0</td>
-      </tr>
+      <OutgoCategory name="Food" />
+      <OutgoCategory name="Car" />
+      <OutgoCategory name="Dogs" />
 
       {/* Add category */}
       <tr>

@@ -1,0 +1,8 @@
+.budget-table {
+  border-collapse: collapse;
+}
+
+.budget-table th,
+.budget-table td {
+  border: 1px solid lightgrey;
+}
