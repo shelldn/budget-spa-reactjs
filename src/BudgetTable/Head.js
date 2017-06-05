@@ -1,4 +1,5 @@
 import React from 'react';
+import Total from './Total';
 
 const Head = () => (
 
@@ -50,34 +51,7 @@ const Head = () => (
       <th>Fact</th>
     </tr>
 
-    {/* Total */}
-    <tr>
-      <th></th>
-      <th>0</th>
-      <th>0</th>
-      <th>0</th>
-      <th>0</th>
-      <th>0</th>
-      <th>0</th>
-      <th>0</th>
-      <th>0</th>
-      <th>0</th>
-      <th>0</th>
-      <th>0</th>
-      <th>0</th>
-      <th>0</th>
-      <th>0</th>
-      <th>0</th>
-      <th>0</th>
-      <th>0</th>
-      <th>0</th>
-      <th>0</th>
-      <th>0</th>
-      <th>0</th>
-      <th>0</th>
-      <th>0</th>
-      <th>0</th>
-    </tr>
+    <Total />
 
   </thead>
 
