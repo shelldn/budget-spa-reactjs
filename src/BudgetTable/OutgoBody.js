@@ -2,18 +2,27 @@ import React from 'react';
 import OutgoTotal from './OutgoTotal';
 import OutgoCategory from './OutgoCategory';
 import AddOutgoCategory from './AddOutgoCategory';
+import { connect } from 'react-redux';
 
-const OutgoBody = () => (
+let OutgoBody = ({ categories }) => (
 
-    <tbody>
+  <tbody>
 
-      <OutgoTotal />
-      <OutgoCategory name="Food" />
-      <OutgoCategory name="Car" />
-      <OutgoCategory name="Dogs" />
-      <AddOutgoCategory />
+    <OutgoTotal />
+    {categories.map(c =>
+      <OutgoCategory key={c.id} name={c.name} />
+    )}
+    <AddOutgoCategory />
 
-    </tbody>
+  </tbody>
 );
+
+const mapStateToProps = (state) => ({
+  categories: state.categories.filter(c => c.type === 'outgo')
+});
+
+OutgoBody = connect(
+  mapStateToProps
+)(OutgoBody);
 
 export default OutgoBody;

@@ -2,17 +2,27 @@ import React from 'react';
 import IncomeTotal from './IncomeTotal';
 import IncomeCategory from './IncomeCategory';
 import AddIncomeCategory from './AddIncomeCategory';
+import { connect } from 'react-redux';
 
-const IncomeBody = () => (
+let IncomeBody = ({ categories }) => (
 
   <tbody>
 
     <IncomeTotal />
-    <IncomeCategory name="Salary" />
-    <IncomeCategory name="Deposit" />
+    {categories.map(c =>
+      <IncomeCategory key={c.id} name={c.name} />
+    )}
     <AddIncomeCategory />
 
   </tbody>
 );
+
+const mapStateToProps = (state) => ({
+  categories: state.categories.filter(c => c.type === 'income')
+})
+
+IncomeBody = connect(
+  mapStateToProps
+)(IncomeBody);
 
 export default IncomeBody;
