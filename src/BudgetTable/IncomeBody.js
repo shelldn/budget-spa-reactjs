@@ -1,6 +1,7 @@
 import React from 'react';
 import IncomeTotal from './IncomeTotal';
 import IncomeCategory from './IncomeCategory';
+import AddIncomeCategory from './AddIncomeCategory';
 
 const IncomeBody = () => (
 
@@ -9,36 +10,8 @@ const IncomeBody = () => (
     <IncomeTotal />
     <IncomeCategory name="Salary" />
     <IncomeCategory name="Deposit" />
+    <AddIncomeCategory />
 
-    {/* Add category */}
-    <tr>
-      <td>Add Category</td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-    </tr>
-    
   </tbody>
 );
 
