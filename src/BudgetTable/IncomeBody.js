@@ -18,7 +18,9 @@ let IncomeBody = ({ categories }) => (
 );
 
 const mapStateToProps = (state) => ({
-  categories: state.categories.filter(c => c.type === 'income')
+  categories: state.categories
+    .filter(c => c.type === 'income')
+    .sort((a, b) => a.order > b.order)
 })
 
 IncomeBody = connect(

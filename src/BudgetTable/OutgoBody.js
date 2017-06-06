@@ -18,7 +18,9 @@ let OutgoBody = ({ categories }) => (
 );
 
 const mapStateToProps = (state) => ({
-  categories: state.categories.filter(c => c.type === 'outgo')
+  categories: state.categories
+    .filter(c => c.type === 'outgo')
+    .sort((a, b) => a.order > b.order)
 });
 
 OutgoBody = connect(
