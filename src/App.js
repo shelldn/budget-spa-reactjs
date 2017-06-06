@@ -4,9 +4,7 @@ import BudgetTable from './BudgetTable';
 class App extends Component {
   render() {
     return (
-        <div className="App">
-          <BudgetTable />
-        </div>
+        <div className="App"></div>
     );
   }
 }

@@ -5,11 +5,13 @@ import OutgoBody from './OutgoBody';
 import './index.css';
 
 const BudgetTable = () => (
-  <table className="budget-table">
-    <Head />
-    <IncomeBody />
-    <OutgoBody />
-  </table>
+  <div>
+    <table className="budget-table">
+      <Head />
+      <IncomeBody />
+      <OutgoBody />
+    </table>
+  </div>
 );
 
 export default BudgetTable;
