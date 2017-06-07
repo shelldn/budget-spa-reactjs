@@ -8,7 +8,8 @@ const initialState = {
     { id: 50, order: 50, type: 'outgo', name: 'Dogs' }
   ],
   operations: [
-    { id: 10, categoryId: 10, month: 6, plan: 10, fact: 20 }
+    { id: 10, categoryId: 10, month: 6, plan: 10, fact: 20 },
+    { id: 20, categoryId: 20, month: 7, plan: 100 }
   ]
 }
 

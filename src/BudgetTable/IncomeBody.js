@@ -10,7 +10,7 @@ let IncomeBody = ({ categories }) => (
 
     <IncomeTotal />
     {categories.map(c =>
-      <IncomeCategory key={c.id} name={c.name} />
+      <IncomeCategory key={c.id} {...c} />
     )}
     <AddIncomeCategory />
 
