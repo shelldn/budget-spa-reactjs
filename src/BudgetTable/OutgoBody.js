@@ -10,7 +10,7 @@ let OutgoBody = ({ categories }) => (
 
     <OutgoTotal />
     {categories.map(c =>
-      <OutgoCategory key={c.id} name={c.name} />
+      <OutgoCategory key={c.id} {...c} />
     )}
     <AddOutgoCategory />
 
