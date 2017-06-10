@@ -1,31 +1,30 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-let Total = ({ totals }) => (
+let Total = ({ total }) => (
+  <th>{total}</th>
+)
 
-  <tr>
-    <th></th>
-    {[...totals].map((t, idx) => 
-      <th key={idx}>{t}</th>
-    )}
-  </tr>
+const sum = (operations) => operations.reduce((a, b) => a + b, 0);
 
-);
-
-function* mapMonthsToTotals(months, categories, operations) {
-  for (var i = 0; i < months.length; i++) {
-    let op = operations.filter(o => o.month === months[i]).reduce((a, b) => ({ 
-      plan: a.plan + (categories.some(c => c.type === 'income' && c.id === b.categoryId) ? 1 : -1) * b.plan,
-      fact: a.fact + (categories.some(c => c.type === 'income' && c.id === b.categoryId) ? 1 : -1) * b.fact
-    }), { plan: 0, fact: 0 });
-    yield op.plan;
-    yield op.fact;
-  }
+function getByType(type, categories, operations) {
+  return operations.filter(o => categories.some(c => c.type === type && c.id === o.categoryId));
 }
 
-const mapStateToProps = ({ months, categories, operations }) => ({
-  totals: mapMonthsToTotals(months, categories, operations)
-});
+const mapStateToProps = (state, props) => {
+  const monthOperations = state.operations
+    .filter(o => o.month === props.month);
+
+  const getIncomes = getByType.bind(null, 'income', state.categories);
+  const getOutgoes = getByType.bind(null, 'outgo', state.categories);
+
+  const incomes = getIncomes(monthOperations).map(i => props.plan ? i.plan : i.fact);
+  const outgoes = getOutgoes(monthOperations).map(o => props.plan ? o.plan : o.fact);
+
+  return {
+    total: sum(incomes) - sum(outgoes)
+  };
+}
 
 Total = connect(
   mapStateToProps
