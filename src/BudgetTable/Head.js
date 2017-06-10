@@ -1,5 +1,6 @@
 import React from 'react';
-import Total from './Total';
+import TotalPlan from './TotalPlan';
+import TotalFact from './TotalFact';
 import { connect } from 'react-redux';
 
 let Head = ({ months, operations }) => (
@@ -21,7 +22,10 @@ let Head = ({ months, operations }) => (
     {/* Totals */}
     <tr>
       <th></th>
-      {operations.map((o, idx) => <Total key={idx} {...o} />)}
+      {operations.map((o, idx) => o.plan
+        ? <TotalPlan key={idx} month={o.month} />
+        : <TotalFact key={idx} month={o.month} />
+      )}
     </tr>
 
   </thead>
