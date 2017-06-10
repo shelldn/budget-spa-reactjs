@@ -9,8 +9,9 @@ const initialState = {
   ],
   operations: [
     { id: 10, categoryId: 10, month: 6, plan: 10, fact: 20 },
+    { id: 15, categoryId: 20, month: 6, plan: 33, fact: 3 },
     { id: 20, categoryId: 20, month: 7, plan: 100, fact: 0 },
-    { id: 30, categoryId: 50, month: 6, plan: 600, fact: 900 }
+    { id: 30, categoryId: 50, month: 6, plan: 600, fact: 900 },
   ]
 }
 
