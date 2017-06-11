@@ -1,9 +1,11 @@
 import React from 'react';
 
-const AddIncomeCategory = () => (
+const AddIncomeCategory = ({ onClick }) => (
 
   <tr>
-    <td>Add Category</td>
+    <td>
+      <a href="javascript:void(0)" onClick={() => onClick()}>Add Category</a>
+    </td>
     <td></td>
     <td></td>
     <td></td>

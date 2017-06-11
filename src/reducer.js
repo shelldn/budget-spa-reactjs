@@ -29,6 +29,13 @@ const months = (state = [], action) => state;
 
 const category = (state, action) => {
   switch (action.type) {
+    case 'budget-io/categories/ADD':
+      return {
+        id: 0,
+        type: 'income',
+        name: action.payload.name
+      };
+
     case 'budget-io/categories/EDIT':
       if (state.id !== action.payload.id)
         return state;
@@ -45,6 +52,12 @@ const category = (state, action) => {
 
 const categories = (state = [], action) => {
   switch (action.type) {
+    case 'budget-io/categories/ADD':
+      return [
+        ...state,
+        category(undefined, action)
+      ];
+
     case 'budget-io/categories/EDIT':
       return state.map(c => category(c, action));
 

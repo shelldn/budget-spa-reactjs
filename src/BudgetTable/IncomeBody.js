@@ -4,7 +4,7 @@ import IncomeCategory from './IncomeCategory';
 import AddIncomeCategory from './AddIncomeCategory';
 import { connect } from 'react-redux';
 
-let IncomeBody = ({ categories }) => (
+let IncomeBody = ({ categories, addCategory }) => (
 
   <tbody>
 
@@ -12,7 +12,7 @@ let IncomeBody = ({ categories }) => (
     {categories.map(c =>
       <IncomeCategory key={c.id} {...c} />
     )}
-    <AddIncomeCategory />
+    <AddIncomeCategory onClick={addCategory} />
 
   </tbody>
 );
@@ -23,8 +23,18 @@ const mapStateToProps = (state) => ({
     .sort((a, b) => a.order > b.order)
 })
 
+const mapDispatchToProps = (dispatch) => ({
+  addCategory: () => dispatch({
+    type: 'budget-io/categories/ADD',
+    payload: {
+      name: 'New Category'
+    }
+  })
+});
+
 IncomeBody = connect(
-  mapStateToProps
+  mapStateToProps,
+  mapDispatchToProps
 )(IncomeBody);
 
 export default IncomeBody;
