@@ -1,11 +1,17 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-let IncomeCategory = ({ name, operations }) => (
+const EditIncomePlan = ({ id, value, onEdit }) => (
+  <td>
+    <input type="text" value={value} onChange={e => onEdit(id, e.target.value ? parseInt(e.target.value) : 0)} />
+  </td>
+)
+
+let IncomeCategory = ({ name, operations, onEdit }) => (
 
   <tr>
     <td>{name}</td>
-    {[...operations].map(o => <td key={o.id}>{o.value}</td>)}
+    {[...operations].map(o => <EditIncomePlan key={o.key} id={o.id} value={o.value} onEdit={onEdit} />)}
   </tr>
 
 );
@@ -17,8 +23,8 @@ const filterOperations = (operations, categoryId) => (
 function* mapMonthsToOperations(months, operations) {
   for (var i = 0; i < months.length; i++) {
     const op = operations.find(o => o.month === months[i]);
-    yield { id: i * 2, value: op ? op.plan : 0 };
-    yield { id: i * 2 + 1, value: op ? op.fact : 0 };
+    yield { key: i * 2, id: op ? op.id : -1, value: op ? op.plan : 0 };
+    yield { key: i * 2 + 1, id: op ? op.id : -1, value: op ? op.fact : 0 };
   }
 }
 
@@ -26,8 +32,19 @@ const mapStateToProps = (state, props) => ({
   operations: mapMonthsToOperations(state.months, filterOperations(state.operations, props.id))
 });
 
+const mapDispatchToProps = (dispatch) => ({
+  onEdit: (id, newValue) => dispatch({
+    type: 'EDIT_INCOME_PLAN',
+    payload: {
+      id,
+      newValue
+    }
+  })
+});
+
 IncomeCategory = connect(
-  mapStateToProps
+  mapStateToProps,
+  mapDispatchToProps
 )(IncomeCategory);
 
 export default IncomeCategory;

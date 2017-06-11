@@ -1,27 +1,35 @@
-const initialState = {
-  months: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
-  categories: [
-    { id: 10, order: 10, type: 'income', name: 'Salary' },
-    { id: 20, order: 20, type: 'income', name: 'Bank Deposit' },
-    { id: 25, order: 25, type: 'income', name: 'Business' },
-    { id: 30, order: 30, type: 'outgo', name: 'Food' },
-    { id: 40, order: 40, type: 'outgo', name: 'Car' },
-    { id: 50, order: 50, type: 'outgo', name: 'Dogs' }
-  ],
-  operations: [
-    { id: 10, categoryId: 10, month: 6, plan: 10, fact: 20 },
-    { id: 15, categoryId: 20, month: 6, plan: 33, fact: 3 },
-    { id: 16, categoryId: 25, month: 6, plan: 87, fact: 77 },
-    { id: 20, categoryId: 20, month: 7, plan: 100, fact: 0 },
-    { id: 30, categoryId: 50, month: 6, plan: 600, fact: 900 },
-  ]
-}
+import { combineReducers } from 'redux';
 
-const reducer = (state = initialState, action) => {
-  switch (action) {
+const operation = (state, action) => {
+  switch (action.type) {
+    case 'EDIT_INCOME_PLAN':
+      if (state.id !== action.payload.id)
+        return state;
+
+      return {
+        ...state,
+        plan: action.payload.newValue        
+      };
+
     default:
       return state;
   }
 }
 
-export default reducer;
+const operations = (state = [], action) => {
+  switch (action.type) {
+    case 'EDIT_INCOME_PLAN':
+      return state.map(i => operation(i, action));
+    default:
+      return state;
+  }
+}
+
+const months = (state = [], action) => state;
+const categories = (state = [], action) => state;
+
+export default combineReducers({
+  months,
+  categories,
+  operations
+});
