@@ -26,7 +26,32 @@ const operations = (state = [], action) => {
 }
 
 const months = (state = [], action) => state;
-const categories = (state = [], action) => state;
+
+const category = (state, action) => {
+  switch (action.type) {
+    case 'budget-io/categories/EDIT':
+      if (state.id !== action.payload.id)
+        return state;
+
+      return {
+        ...state,
+        name: action.payload.newName
+      };
+
+    default:
+      return state;
+  }
+};
+
+const categories = (state = [], action) => {
+  switch (action.type) {
+    case 'budget-io/categories/EDIT':
+      return state.map(c => category(c, action));
+
+    default:
+      return state;
+  }
+};
 
 export default combineReducers({
   months,

@@ -1,4 +1,5 @@
 import React from 'react';
+import EditIncomeCategory from './EditIncomeCategory';
 import { connect } from 'react-redux';
 
 const EditIncomePlan = ({ id, value, onEdit }) => (
@@ -7,10 +8,10 @@ const EditIncomePlan = ({ id, value, onEdit }) => (
   </td>
 )
 
-let IncomeCategory = ({ name, operations, onEdit }) => (
+let IncomeCategory = ({ id, name, operations, onCategoryEdit, onEdit }) => (
 
   <tr>
-    <td>{name}</td>
+    <EditIncomeCategory id={id} name={name} onEdit={onCategoryEdit} />
     {[...operations].map(o => <EditIncomePlan key={o.key} id={o.id} value={o.value} onEdit={onEdit} />)}
   </tr>
 
@@ -38,6 +39,13 @@ const mapDispatchToProps = (dispatch) => ({
     payload: {
       id,
       newValue
+    }
+  }),
+  onCategoryEdit: (id, newName) => dispatch({
+    type: 'budget-io/categories/EDIT',
+    payload: {
+      id,
+      newName
     }
   })
 });
