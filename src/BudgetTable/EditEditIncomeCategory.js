@@ -8,6 +8,11 @@ class EditEditIncomeCategory extends Component {
     this.input.select();
   }
 
+  handleKeyDown(e) {
+    if (e.keyCode === 27) // Escape
+      this.props.discard();
+  }
+
   handleSubmit(e) {
     e.preventDefault();
     this.props.commit(this.props.id, this.props.name);
@@ -18,7 +23,9 @@ class EditEditIncomeCategory extends Component {
     const { id, name, edit } = this.props;
 
     return (
-      <form onSubmit={this.handleSubmit.bind(this)}>
+      <form
+        onKeyDown={this.handleKeyDown.bind(this)}
+        onSubmit={this.handleSubmit.bind(this)}>
         <input
           ref={i => this.input = i}
           type="text"
@@ -44,6 +51,10 @@ const mapDispatchToProps = (dispatch) => ({
     payload: {
       newName
     }
+  }),
+
+  discard: () => dispatch({
+    type: 'budget-io/categories/to_edit/DISCARD'
   }),
 
   commit: (id, newName) => dispatch({

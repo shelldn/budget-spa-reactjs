@@ -25,6 +25,7 @@ const add = (state = null, action) => {
 
 const EDIT = `${prefix}/EDIT`;
 const EDIT_EDIT = `${prefix}/to_edit/EDIT`;
+const EDIT_DISCARD = `${prefix}/to_edit/DISCARD`;
 
 const edit = (state = null, action) => {
   switch (action.type) {
@@ -41,6 +42,7 @@ const edit = (state = null, action) => {
         name: action.payload.newName
       };
 
+    case EDIT_DISCARD:
     case EDIT_COMMIT:
       return null;
 
