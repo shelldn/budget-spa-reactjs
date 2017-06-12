@@ -2,7 +2,7 @@ import { combineReducers } from 'redux';
 
 const prefix = 'budget-io/categories';
 const ADD = `${prefix}/ADD`;
-const EDIT = `${prefix}/to_add/EDIT`;
+const ADD_EDIT = `${prefix}/to_add/EDIT`;
 
 const add = (state = null, action) => {
   switch (action.type) {
@@ -12,7 +12,7 @@ const add = (state = null, action) => {
         name: ''
       };
 
-    case EDIT:
+    case ADD_EDIT:
       return {
         ...state,
         name: action.payload.newName
@@ -23,7 +23,31 @@ const add = (state = null, action) => {
   }
 };
 
+const EDIT = `${prefix}/EDIT`;
+const EDIT_EDIT = `${prefix}/to_edit/EDIT`;
+
+const edit = (state = null, action) => {
+  switch (action.type) {
+    
+    case EDIT:
+      return {
+        id: action.payload.id,
+        name: action.payload.name
+      };
+
+    case EDIT_EDIT:
+      return {
+        ...state,
+        name: action.payload.newName
+      };
+
+    default:
+      return state;
+  }
+}
+
 export default combineReducers({
   list: (state = []) => state,
-  add
+  add,
+  edit
 });
