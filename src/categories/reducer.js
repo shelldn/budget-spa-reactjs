@@ -41,13 +41,44 @@ const edit = (state = null, action) => {
         name: action.payload.newName
       };
 
+    case EDIT_COMMIT:
+      return null;
+
     default:
       return state;
   }
 }
 
+const EDIT_COMMIT = `${prefix}/to_edit/COMMIT`;
+
+const commit = (state, action) => {
+  switch (action.type) {
+    case EDIT_COMMIT:
+      if (state.id !== action.payload.id)
+        return state;
+
+      return {
+        ...state,
+        name: action.payload.newName
+      };
+    
+    default:
+      return state;
+  }
+};
+
+const list = (state = [], action) => {
+  switch (action.type) {
+    case EDIT_COMMIT:
+      return state.map(c => commit(c, action));
+    
+    default:
+      return state;
+  }
+};
+
 export default combineReducers({
-  list: (state = []) => state,
+  list,
   add,
   edit
 });
