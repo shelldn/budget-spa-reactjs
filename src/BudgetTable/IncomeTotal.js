@@ -26,7 +26,7 @@ function* mapMonthsToTotals(months, operations) {
 }
 
 const mapStateToProps = ({ months, categories, operations }) => ({
-  totals: mapMonthsToTotals(months, operations.filter(o => categories.filter(c => c.type === 'income').some(c => c.id === o.categoryId)))
+  totals: mapMonthsToTotals(months, operations.filter(o => categories.list.filter(c => c.type === 'income').some(c => c.id === o.categoryId)))
 });
 
 IncomeTotal = connect(

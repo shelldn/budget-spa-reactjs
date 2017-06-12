@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 
 const EditIncomePlan = ({ id, value, onEdit }) => (
   <td>
-    <input type="text" value={value} onChange={e => onEdit(id, e.target.value ? parseInt(e.target.value) : 0)} />
+    <input type="text" value={value} onChange={e => onEdit(id, e.target.value ? parseInt(e.target.value, 10) : 0)} />
   </td>
 )
 
