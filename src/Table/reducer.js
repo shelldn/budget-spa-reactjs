@@ -1,3 +1,4 @@
+const SELECT = 'budget-io/table/cell/SELECT';
 const PREVIOUS = 'budget-io/table/row/PREVIOUS';
 const NEXT = 'budget-io/table/row/NEXT';
 const LEFT = 'budget-io/table/col/PREVIOUS';
@@ -10,6 +11,13 @@ const initialState = {
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
+
+    case SELECT:
+      return {
+        ...state,
+        row: action.payload.row,
+        col: action.payload.col
+      }
 
     case PREVIOUS:
       return {
