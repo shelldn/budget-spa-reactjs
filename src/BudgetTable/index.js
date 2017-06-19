@@ -5,7 +5,13 @@ import './index.css';
 const BudgetTable = () => (
   <Table>
     <Body>
-      <Row selected>
+      <Row>
+        <th>#</th>
+        <th>Name</th>
+      </Row>
+    </Body>
+    <Body>
+      <Row>
         <td>1</td>
         <td>a</td>
       </Row>
@@ -13,6 +19,8 @@ const BudgetTable = () => (
         <td>2</td>
         <td>b</td>
       </Row>
+    </Body>
+    <Body>
       <Row>
         <td>3</td>
         <td>c</td>

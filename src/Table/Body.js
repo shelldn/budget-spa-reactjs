@@ -1,9 +1,9 @@
 import React, { Children, cloneElement } from 'react';
 
-const Body = ({ children }) => {
+const Body = ({ rowBias, children }) => {
   return (
     <tbody>
-      {Children.map(children, (c, rowId) => cloneElement(c, { rowId }))}
+      {Children.map(children, (c, idx) => cloneElement(c, { rowId: rowBias + idx }))}
     </tbody>
   );
 }
