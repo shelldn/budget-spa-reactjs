@@ -1,9 +1,9 @@
 import React, { Children, cloneElement } from 'react';
 
-const Body = ({ rowBias, children }) => (
-  <tbody>
+const Head = ({ rowBias, children }) => (
+  <thead>
     {Children.map(children, (c, idx) => cloneElement(c, { id: rowBias + idx }))}
-  </tbody>
+  </thead>  
 )
 
-export default Body;
+export default Head;

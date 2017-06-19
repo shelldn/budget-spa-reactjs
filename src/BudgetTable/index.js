@@ -1,16 +1,16 @@
 import React from 'react';
-import Table, { Body, Row, Cell } from '../Table';
+import Table, { Head, Body, Row, Cell } from '../Table';
 import './index.css';
 
 const BudgetTable = () => (
   <Table>
-    <Body>
+    <Head>
       <Row>
         <Cell>#</Cell>
         <Cell>Name</Cell>
         <Cell>!</Cell>
       </Row>
-    </Body>
+    </Head>
     <Body>
       <Row>
         <Cell>1</Cell>

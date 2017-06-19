@@ -1,4 +1,5 @@
 import React, { Children, cloneElement } from 'react';
+import Head from './Head';
 import Body from './Body';
 import Row from './Row';
 import Cell from './Cell';
@@ -18,4 +19,4 @@ const Table = ({ children }) => {
 
 export default Table;
 
-export { Body, Row, Cell };
+export { Head, Body, Row, Cell };
