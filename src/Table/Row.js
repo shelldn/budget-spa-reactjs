@@ -1,19 +1,9 @@
-import React from 'react';
-import { connect } from 'react-redux';
-import './Row.css';
+import React, { Children, cloneElement } from 'react';
 
-let Row = ({ selected, children }) => (
-  <tr className={selected && 'row row--selected'}>
-    {children}
+const Row = ({ id, children }) => (
+  <tr>
+    {Children.map(children, (c, col) => cloneElement(c, { row: id, col }))}
   </tr>
 )
-
-const mapStateToProps = (state, props) => ({
-  selected: state.table.row === props.rowId
-});
-
-Row = connect(
-  mapStateToProps
-)(Row);
 
 export default Row;

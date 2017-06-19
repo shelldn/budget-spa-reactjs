@@ -28,24 +28,29 @@ const initialState = {
     { id: 16, categoryId: 25, month: 6, plan: 87, fact: 77 },
     { id: 20, categoryId: 20, month: 7, plan: 100, fact: 0 },
     { id: 30, categoryId: 50, month: 6, plan: 600, fact: 900 },
-  ],
-  table: {
-    row: null
-  }
+  ]
 };
 
 const store = createStore(rootReducer, initialState, applyMiddleware(logger));
 
 document.addEventListener('keydown', e => {
-  let type = 'budget-io/table/row';
+  let type;
 
   switch (e.keyCode) {
-    case 38:
-      type += '/PREVIOUS';
+    case 38: // Up
+      type = 'budget-io/table/row/PREVIOUS';
       break;
     
-    case 40:
-      type += '/NEXT';
+    case 40: // Down
+      type = 'budget-io/table/row/NEXT';
+      break;
+
+    case 37: // Left
+      type = 'budget-io/table/col/PREVIOUS';
+      break;
+
+    case 39:
+      type = 'budget-io/table/col/NEXT';
       break;
 
     default:

@@ -1,6 +1,7 @@
 import React, { Children, cloneElement } from 'react';
 import Body from './Body';
 import Row from './Row';
+import Cell from './Cell';
 
 const Table = ({ children }) => {
   let rowBias = 0;
@@ -17,4 +18,4 @@ const Table = ({ children }) => {
 
 export default Table;
 
-export { Body, Row };
+export { Body, Row, Cell };

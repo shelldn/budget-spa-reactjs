@@ -1,33 +1,38 @@
 import React from 'react';
-import Table, { Body, Row } from '../Table';
+import Table, { Body, Row, Cell } from '../Table';
 import './index.css';
 
 const BudgetTable = () => (
   <Table>
     <Body>
       <Row>
-        <th>#</th>
-        <th>Name</th>
+        <Cell>#</Cell>
+        <Cell>Name</Cell>
+        <Cell>!</Cell>
       </Row>
     </Body>
     <Body>
       <Row>
-        <td>1</td>
-        <td>a</td>
+        <Cell>1</Cell>
+        <Cell>a</Cell>
+        <Cell>@</Cell>
       </Row>
       <Row>
-        <td>2</td>
-        <td>b</td>
+        <Cell>2</Cell>
+        <Cell>b</Cell>
+        <Cell>#</Cell>
       </Row>
     </Body>
     <Body>
       <Row>
-        <td>3</td>
-        <td>c</td>
+        <Cell>3</Cell>
+        <Cell>c</Cell>
+        <Cell>$</Cell>
       </Row>
       <Row>
-        <td>4</td>
-        <td>d</td>
+        <Cell>4</Cell>
+        <Cell>d</Cell>
+        <Cell>%</Cell>
       </Row>
     </Body>
   </Table>
