@@ -4,7 +4,7 @@ import './Cell.css';
 
 let Cell = ({ selected, children, onSelect }) => (
   <td
-    className={selected && 'cell cell--selected'}
+    className={`cell ${selected && 'cell--selected'}`}
     onClick={onSelect}
   >
     {children}
