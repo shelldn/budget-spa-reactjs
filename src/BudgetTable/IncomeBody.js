@@ -1,42 +1,33 @@
 import React from 'react';
-import IncomeTotal from './IncomeTotal';
-import IncomeCategory from './IncomeCategory';
-import AddIncomeCategory from './AddIncomeCategory';
+import { Body, Row, Cell } from '../Table';
 import { connect } from 'react-redux';
 
-let IncomeBody = ({ categoryToAdd, categories, addCategory }) => (
+let IncomeBody = ({ rowBias, months, categories }) => (
 
-  <tbody>
-
-    <IncomeTotal />
-    {categories.map(c =>
-      <IncomeCategory key={c.id} {...c} />
+  <Body rowBias={rowBias}>
+    {categories.map(c => 
+      <Row key={c.id}>
+        <Cell>{c.name}</Cell>
+        {months.map(m => [
+          <Cell>{m}</Cell>,
+          <Cell>{m}</Cell>,
+        ])}
+      </Row>
     )}
-    <AddIncomeCategory categoryToAdd={categoryToAdd} onClick={addCategory} />
+  </Body>
 
-  </tbody>
 );
 
-const mapStateToProps = (state) => ({
-  categories: state.categories.list
-    .filter(c => c.type === 'income')
-    .sort((a, b) => a.order > b.order),
+const getIncomeCategories = (categories) => categories.filter(c => c.type === 'income');
 
-  categoryToAdd: state.categories.add
+const mapStateToProps = (state) => ({
+  months: state.months,
+  categories: getIncomeCategories(state.categories.list)
+    .sort((a, b) => a.order > b.order),
 })
 
-const mapDispatchToProps = (dispatch) => ({
-  addCategory: () => dispatch({
-    type: 'budget-io/categories/ADD',
-    payload: {
-      name: ''
-    }
-  })
-});
-
 IncomeBody = connect(
-  mapStateToProps,
-  mapDispatchToProps
+  mapStateToProps
 )(IncomeBody);
 
 export default IncomeBody;

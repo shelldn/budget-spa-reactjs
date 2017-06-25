@@ -1,9 +1,10 @@
 import React from 'react';
-import Table, { Head, Body, Row, Cell } from '../Table';
+import Table, { Head, Row, Cell } from '../Table';
+import IncomeBody from './IncomeBody';
 import { connect } from 'react-redux';
 import './index.css';
 
-let BudgetTable = ({ months }) => (
+let BudgetTable = ({ months, categories }) => (
   <Table>
     <Head>
       <Row>
@@ -20,29 +21,13 @@ let BudgetTable = ({ months }) => (
         ])}
       </Row>
     </Head>
-    <Body>
-      <Row>
-        <Cell>Income</Cell>
-        {months.map(m => [
-          <Cell>{m}</Cell>,
-          <Cell>{m}</Cell>,
-        ])}
-      </Row>
-    </Body>
-    <Body>
-      <Row>
-        <Cell>Outgo</Cell>
-        {months.map(m => [
-          <Cell>{m}</Cell>,
-          <Cell>{m}</Cell>,
-        ])}
-      </Row>
-    </Body>
+    <IncomeBody />
   </Table>
 );
 
 const mapStateToProps = (state) => ({
-  months: state.months
+  months: state.months,
+  categories: state.categories.list
 });
 
 BudgetTable = connect(
