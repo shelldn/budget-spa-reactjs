@@ -23,17 +23,19 @@ let BudgetTable = ({ months }) => (
     <Body>
       <Row>
         <Cell>Income</Cell>
-        {months.map(m => 
-          <Cell colSpan={2} key={m}>{m}</Cell>
-        )}
+        {months.map(m => [
+          <Cell>{m}</Cell>,
+          <Cell>{m}</Cell>,
+        ])}
       </Row>
     </Body>
     <Body>
       <Row>
         <Cell>Outgo</Cell>
-        {months.map(m => 
-          <Cell colSpan={2} key={m}>{m}</Cell>
-        )}
+        {months.map(m => [
+          <Cell>{m}</Cell>,
+          <Cell>{m}</Cell>,
+        ])}
       </Row>
     </Body>
   </Table>
