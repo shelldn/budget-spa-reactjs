@@ -1,41 +1,50 @@
 import React from 'react';
 import Table, { Head, Body, Row, Cell } from '../Table';
+import { connect } from 'react-redux';
 import './index.css';
 
-const BudgetTable = () => (
+let BudgetTable = ({ months }) => (
   <Table>
     <Head>
       <Row>
-        <Cell>#</Cell>
-        <Cell>Name</Cell>
-        <Cell>!</Cell>
+        <Cell />
+        {months.map(m => 
+          <Cell colSpan={2} key={m}>{m}</Cell>
+        )}
+      </Row>
+      <Row>
+        <Cell />
+        {months.map(_ => [
+          <Cell>Plan</Cell>,
+          <Cell>Fact</Cell>
+        ])}
       </Row>
     </Head>
     <Body>
       <Row>
-        <Cell>1</Cell>
-        <Cell>a</Cell>
-        <Cell>@</Cell>
-      </Row>
-      <Row>
-        <Cell>2</Cell>
-        <Cell>b</Cell>
-        <Cell>#</Cell>
+        <Cell>Income</Cell>
+        {months.map(m => 
+          <Cell colSpan={2} key={m}>{m}</Cell>
+        )}
       </Row>
     </Body>
     <Body>
       <Row>
-        <Cell>3</Cell>
-        <Cell>c</Cell>
-        <Cell>$</Cell>
-      </Row>
-      <Row>
-        <Cell>4</Cell>
-        <Cell>d</Cell>
-        <Cell>%</Cell>
+        <Cell>Outgo</Cell>
+        {months.map(m => 
+          <Cell colSpan={2} key={m}>{m}</Cell>
+        )}
       </Row>
     </Body>
   </Table>
 );
+
+const mapStateToProps = (state) => ({
+  months: state.months
+});
+
+BudgetTable = connect(
+  mapStateToProps
+)(BudgetTable);
 
 export default BudgetTable;

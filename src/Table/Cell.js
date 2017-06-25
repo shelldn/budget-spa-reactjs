@@ -2,8 +2,9 @@ import React from 'react';
 import { connect } from 'react-redux';
 import './Cell.css';
 
-let Cell = ({ selected, children, onSelect }) => (
+let Cell = ({ selected, colSpan, children, onSelect }) => (
   <td
+    colSpan={colSpan}
     className={`cell ${selected && 'cell--selected'}`}
     onClick={onSelect}
   >
