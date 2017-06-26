@@ -1,25 +1,28 @@
 import React from 'react';
-import OutgoTotal from './OutgoTotal';
-import OutgoCategory from './OutgoCategory';
-import AddOutgoCategory from './AddOutgoCategory';
+import { Body, Row, Cell } from '../Table';
 import { connect } from 'react-redux';
 
-let OutgoBody = ({ categories }) => (
+let OutgoBody = ({ rowBias, months, categories }) => (
 
-  <tbody>
-
-    <OutgoTotal />
-    {categories.map(c =>
-      <OutgoCategory key={c.id} {...c} />
+  <Body rowBias={rowBias}>
+    {categories.map(c => 
+      <Row key={c.id}>
+        <Cell>{c.name}</Cell>
+        {months.map(m => [
+          <Cell>{m}</Cell>,
+          <Cell>{m}</Cell>,
+        ])}
+      </Row>
     )}
-    <AddOutgoCategory />
+  </Body>
 
-  </tbody>
 );
 
+const getOutgoCategories = (categories) => categories.filter(c => c.type === 'outgo');
+
 const mapStateToProps = (state) => ({
-  categories: state.categories.list
-    .filter(c => c.type === 'outgo')
+  months: state.months,
+  categories: getOutgoCategories(state.categories.list)
     .sort((a, b) => a.order > b.order)
 });
 

@@ -1,6 +1,7 @@
 import React from 'react';
 import Table, { Head, Row, Cell } from '../Table';
 import IncomeBody from './IncomeBody';
+import OutgoBody from './OutgoBody';
 import { connect } from 'react-redux';
 import './index.css';
 
@@ -22,6 +23,7 @@ let BudgetTable = ({ months, categories }) => (
       </Row>
     </Head>
     <IncomeBody />
+    <OutgoBody />
   </Table>
 );
 
