@@ -8,7 +8,7 @@ let Head = ({ months }) => (
     <Row>
       <Cell />
       {months.map(m => 
-        <Cell colSpan={2} key={m}>{m}</Cell>
+        <Cell colSpan={2} key={m}>{['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'][m - 1]}</Cell>
       )}
     </Row>
     <Row>
