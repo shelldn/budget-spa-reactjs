@@ -1,42 +1,23 @@
 import React, { Component, Children, cloneElement } from 'react';
-import { connect } from 'react-redux';
 
-let idx = 1;
+let bias = 0;
 
 class Body extends Component {
 
   constructor(props) {
     super(props);
-    props.register(Children.count(props.children));
-    props.id = idx++;
+    this._bias = bias;
+    bias += Children.count(props.children);
   }
 
   render() {
-    const { rowBias, children } = this.props;
+
     return (
       <tbody>
-        {Children.map(children, (c, idx) => cloneElement(c, { id: rowBias + idx }))}
+        {Children.map(this.props.children, (c, idx) => cloneElement(c, { id: this._bias + idx }))}
       </tbody>
     );
   }
 }
-
-const mapStateToProps = (state, props) => ({
-  rowBias: state.table.bodies.find(b => b.id === props.id).bias
-});
-
-const mapDispatchToProps = (dispatch) => ({
-  register: childrenCount => dispatch({
-    type: 'budget-io/table/body/REGISTER',
-    payload: {
-      childrenCount
-    }
-  })
-});
-
-Body = connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Body);
 
 export default Body;

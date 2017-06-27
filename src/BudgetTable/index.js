@@ -1,5 +1,5 @@
 import React from 'react';
-import Table, { Head, Row, Cell } from '../Table';
+import Table, { Body, Row, Cell } from '../Table';
 import IncomeBody from './IncomeBody';
 import OutgoBody from './OutgoBody';
 import { connect } from 'react-redux';
@@ -7,7 +7,7 @@ import './index.css';
 
 let BudgetTable = ({ months, categories }) => (
   <Table>
-    <Head>
+    <Body>
       <Row>
         <Cell />
         {months.map(m => 
@@ -21,7 +21,7 @@ let BudgetTable = ({ months, categories }) => (
           <Cell>Fact</Cell>
         ])}
       </Row>
-    </Head>
+    </Body>
     <IncomeBody />
     <OutgoBody />
   </Table>
