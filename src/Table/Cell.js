@@ -5,7 +5,7 @@ import './Cell.css';
 let Cell = ({ selected, colSpan, children, onSelect }) => (
   <td
     colSpan={colSpan}
-    className={`cell ${selected && 'cell--selected'}`}
+    className={`cell${selected ? ' cell--selected' : ''}`}
     onClick={onSelect}
   >
     {children}
