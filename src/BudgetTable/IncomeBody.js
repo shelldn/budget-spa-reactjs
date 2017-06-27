@@ -2,9 +2,9 @@ import React from 'react';
 import { Body, Row, Cell } from '../Table';
 import { connect } from 'react-redux';
 
-let IncomeBody = ({ rowBias, months, categories }) => (
+let IncomeBody = ({ months, categories }) => (
 
-  <Body rowBias={rowBias}>
+  <Body>
     {categories.map(c => 
       <Row key={c.id}>
         <Cell>{c.name}</Cell>
