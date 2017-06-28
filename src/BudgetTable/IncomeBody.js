@@ -1,5 +1,6 @@
 import React from 'react';
 import { Body, Row, Cell } from '../Table';
+import operation from '../operations/operation';
 import { connect } from 'react-redux';
 
 let IncomeBody = ({ months, categories }) => (
@@ -8,10 +9,7 @@ let IncomeBody = ({ months, categories }) => (
     {categories.map(c => 
       <Row key={c.id}>
         <Cell className="budget-table__cell budget-table__cell--income">{c.name}</Cell>
-        {months.map(m => [
-          <Cell className="budget-table__cell budget-table__cell--income">{m}</Cell>,
-          <Cell className="budget-table__cell budget-table__cell--income">{m}</Cell>,
-        ])}
+        {months.map(m => operation(m, c.id))}
       </Row>
     )}
   </Body>
