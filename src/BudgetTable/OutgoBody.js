@@ -7,10 +7,10 @@ let OutgoBody = ({ rowBias, months, categories }) => (
   <Body rowBias={rowBias}>
     {categories.map(c => 
       <Row key={c.id}>
-        <Cell>{c.name}</Cell>
+        <Cell className="budget-table__cell budget-table__cell--outgo">{c.name}</Cell>
         {months.map(m => [
-          <Cell>{m}</Cell>,
-          <Cell>{m}</Cell>,
+          <Cell className="budget-table__cell budget-table__cell--outgo">{m}</Cell>,
+          <Cell className="budget-table__cell budget-table__cell--outgo">{m}</Cell>,
         ])}
       </Row>
     )}

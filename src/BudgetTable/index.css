@@ -6,3 +6,11 @@
 .budget-table td {
   border: 1px solid lightgrey;
 }
+
+.budget-table__cell.budget-table__cell--income {
+  background: #BEB;
+}
+
+.budget-table__cell.budget-table__cell--outgo {
+  background: #EBB;
+}

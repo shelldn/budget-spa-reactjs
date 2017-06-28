@@ -7,10 +7,10 @@ let IncomeBody = ({ months, categories }) => (
   <Body>
     {categories.map(c => 
       <Row key={c.id}>
-        <Cell>{c.name}</Cell>
+        <Cell className="budget-table__cell budget-table__cell--income">{c.name}</Cell>
         {months.map(m => [
-          <Cell>{m}</Cell>,
-          <Cell>{m}</Cell>,
+          <Cell className="budget-table__cell budget-table__cell--income">{m}</Cell>,
+          <Cell className="budget-table__cell budget-table__cell--income">{m}</Cell>,
         ])}
       </Row>
     )}
@@ -18,8 +18,11 @@ let IncomeBody = ({ months, categories }) => (
 
 );
 
-const filter = (categories) => categories.filter(c => c.type === 'income');
-const sort = (categories) => categories.sort((a, b) => a.order > b.order);
+const filter = (categories) => categories
+  .filter(c => c.type === 'income');
+  
+const sort = (categories) => categories
+  .sort((a, b) => a.order > b.order);
 
 const mapStateToProps = (state) => ({
   months: state.months,
