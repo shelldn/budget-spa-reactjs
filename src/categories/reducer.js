@@ -1,6 +1,7 @@
 import { combineReducers } from 'redux';
 
 const prefix = 'budget-io/categories';
+const FETCH = `${prefix}/FETCH`;
 const ADD = `${prefix}/ADD`;
 const ADD_EDIT = `${prefix}/to_add/EDIT`;
 
@@ -71,6 +72,9 @@ const commit = (state, action) => {
 
 const list = (state = [], action) => {
   switch (action.type) {
+    case FETCH:
+      return action.payload;
+
     case EDIT_COMMIT:
       return state.map(c => commit(c, action));
     
