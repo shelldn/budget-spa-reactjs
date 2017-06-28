@@ -18,12 +18,15 @@ let OutgoBody = ({ rowBias, months, categories }) => (
 
 );
 
-const getOutgoCategories = (categories) => categories.filter(c => c.type === 'outgo');
+const filter = (categories) => categories
+  .filter(c => c.type === 'outgo');
+  
+const sort = (categories) => categories
+  .sort((a, b) => a.order > b.order);
 
 const mapStateToProps = (state) => ({
   months: state.months,
-  categories: getOutgoCategories(state.categories.list)
-    .sort((a, b) => a.order > b.order)
+  categories: sort(filter(state.categories.list))
 });
 
 OutgoBody = connect(

@@ -18,12 +18,12 @@ let IncomeBody = ({ months, categories }) => (
 
 );
 
-const getCategories = (categories) => categories.filter(c => c.type === 'income');
+const filter = (categories) => categories.filter(c => c.type === 'income');
+const sort = (categories) => categories.sort((a, b) => a.order > b.order);
 
 const mapStateToProps = (state) => ({
   months: state.months,
-  categories: getCategories(state.categories.list)
-    .sort((a, b) => a.order > b.order),
+  categories: sort(filter(state.categories.list))
 })
 
 IncomeBody = connect(
