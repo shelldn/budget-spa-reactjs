@@ -2,8 +2,7 @@ import React from 'react';
 import { Cell } from '../Table';
 import { connect } from 'react-redux';
 
-let Plan = ({ plan }) => <Cell>{plan}</Cell>;
-let Fact = ({ fact }) => <Cell>{fact}</Cell>
+let Operation = ({ value, type }) => <Cell>{value[type]}</Cell>;
 
 const find = (operations, month, categoryId) => {
   const operation = operations.find(o =>
@@ -14,22 +13,17 @@ const find = (operations, month, categoryId) => {
 }
 
 const mapStateToProps = (state, props) => ({
-  plan: find(
+  value: find(
     state.operations,
     props.month,
-    props.categoryId).plan,
-  fact: find(
-    state.operations,
-    props.month,
-    props.categoryId).fact
+    props.categoryId)
 })
 
-Plan = connect(mapStateToProps)(Plan);
-Fact = connect(mapStateToProps)(Fact);
+Operation = connect(mapStateToProps)(Operation);
 
 const operation = (month, categoryId) => [
-  <Plan month={month} categoryId={categoryId}  />,
-  <Fact month={month} categoryId={categoryId}  />,
+  <Operation month={month} categoryId={categoryId} type="plan" />,
+  <Operation month={month} categoryId={categoryId} type="fact" />
 ]
 
 export default operation;
