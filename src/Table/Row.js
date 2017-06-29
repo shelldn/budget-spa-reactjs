@@ -1,9 +1,24 @@
-import React, { Children, cloneElement } from 'react';
+import React, { Component, Children, cloneElement } from 'react';
+import { resetIdx } from './Cell';
 
-const Row = ({ id, children }) => (
-  <tr>
-    {Children.map(children, (c, col) => cloneElement(c, { row: id, col }))}
-  </tr>
-)
+let idx = 0;
+
+class Row extends Component {
+
+  constructor(props) {
+    super(props);
+    this._row = idx++;
+  }
+
+  render() {
+    const { children } = this.props;
+    resetIdx();
+    return (
+      <tr>
+        {Children.map(children, c => cloneElement(c, { row: this._row }))}
+      </tr>
+    );
+  }
+}
 
 export default Row;

@@ -26,7 +26,7 @@ fetch('http://localhost:8080/api/budgets/2017/categories', {
   headers: {
     'Authorization': `Bearer ${token}`
   }
-}).then(response => response.json().then(categories => store.dispatch({ type: 'budget-io/categories/FETCH', payload: categories })));
+}).then(response => response.json().then(categories => { store.dispatch({ type: 'budget-io/categories/FETCH', payload: categories }); }));
 
 fetch('http://localhost:8080/api/budgets/2017/operations', {
   headers: {

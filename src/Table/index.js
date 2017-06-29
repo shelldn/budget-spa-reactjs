@@ -4,11 +4,13 @@ import Row from './Row';
 import Cell from './Cell';
 import './Table.css';
 
-const Table = ({ children }) => (
-  <table className="table">
-    {children}
-  </table>
-)
+const Table = ({ children }) => {
+  return (
+    <table className="table">
+      {children}
+    </table>
+  );
+}
 
 export default Table;
 

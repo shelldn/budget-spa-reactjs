@@ -2,7 +2,7 @@ import React from 'react';
 import { Cell } from '../Table';
 import { connect } from 'react-redux';
 
-let Operation = ({ value, type }) => <Cell>{value[type]}</Cell>;
+let Operation = ({ value, row, type }) => <Cell row={row}>{value[type]}</Cell>;
 
 const find = (operations, month, categoryId) => {
   const operation = operations.find(o =>

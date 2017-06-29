@@ -1,23 +1,9 @@
-import React, { Component, Children, cloneElement } from 'react';
+import React from 'react';
 
-let bias = 0;
-
-class Body extends Component {
-
-  constructor(props) {
-    super(props);
-    this._bias = bias;
-    bias += Children.count(props.children);
-  }
-
-  render() {
-
-    return (
-      <tbody>
-        {Children.map(this.props.children, (c, idx) => cloneElement(c, { id: this._bias + idx }))}
-      </tbody>
-    );
-  }
-}
+const Body = ({ children }) => (
+  <tbody>
+    {children}
+  </tbody>
+)
 
 export default Body;

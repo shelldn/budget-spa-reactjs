@@ -1,7 +1,8 @@
 .cell {
   padding: 5px 10px;
+  border: 1px solid #eee;
 }
 
 .cell.cell--selected {
-  border: 1px solid #e73410;
+  border: 2px solid #e73410;
 }
