@@ -6,6 +6,13 @@ import { connect } from 'react-redux';
 let IncomeBody = ({ months, categories }) => (
 
   <Body>
+    <Row>
+      <Cell className="budget-table__income-total"></Cell>
+      {months.map(() => [
+        <Cell className="budget-table__income-total">0</Cell>,
+        <Cell className="budget-table__income-total">0</Cell>
+      ])}
+    </Row>
     {categories.map(c => 
       <Row key={c.id}>
         <Cell className="budget-table__cell budget-table__cell--income">{c.name}</Cell>

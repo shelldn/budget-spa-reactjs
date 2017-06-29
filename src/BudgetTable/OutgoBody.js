@@ -6,6 +6,13 @@ import { connect } from 'react-redux';
 let OutgoBody = ({ rowBias, months, categories }) => (
 
   <Body rowBias={rowBias}>
+    <Row>
+      <Cell className="budget-table__outgo-total"></Cell>
+      {months.map(() => [
+        <Cell className="budget-table__outgo-total">0</Cell>,
+        <Cell className="budget-table__outgo-total">0</Cell>
+      ])}
+    </Row>
     {categories.map(c => 
       <Row key={c.id}>
         <Cell className="budget-table__cell budget-table__cell--outgo">{c.name}</Cell>
