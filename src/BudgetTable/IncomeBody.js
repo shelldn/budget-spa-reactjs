@@ -1,9 +1,9 @@
 import React from 'react';
 import { Body, Row, Cell } from '../Table';
-import operation from '../operations/operation';
+import { Plan, Fact } from '../Operation';
 import { connect } from 'react-redux';
 
-let IncomeBody = ({ months, categories }) => (
+let IncomeBody = ({ months, categories, operations }) => (
 
   <Body>
     <Row>
@@ -16,7 +16,14 @@ let IncomeBody = ({ months, categories }) => (
     {categories.map(c => 
       <Row key={c.id}>
         <Cell className="budget-table__cell budget-table__cell--income">{c.name}</Cell>
-        {months.map(m => operation(m, c.id))}
+        {months.map(m => operations.find(o => o.monthId === m) || { plan: 0, fact: 0 }).map(o => [
+          <Cell>
+            <Plan value={o.plan} />
+          </Cell>,
+          <Cell>
+            <Fact value={o.fact} />
+          </Cell>
+        ])}
       </Row>
     )}
   </Body>
@@ -31,7 +38,8 @@ const sort = (categories) => categories
 
 const mapStateToProps = (state) => ({
   months: state.months,
-  categories: sort(filter(state.categories.list))
+  categories: sort(filter(state.categories.list)),
+  operations: state.operations
 })
 
 IncomeBody = connect(

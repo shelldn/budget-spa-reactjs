@@ -1,6 +1,6 @@
 import React from 'react';
 import { Body, Row, Cell } from '../Table';
-import operation from '../operations/operation';
+import { Plan, Fact } from '../Operation';
 import { connect } from 'react-redux';
 
 let OutgoBody = ({ rowBias, months, categories }) => (
@@ -16,7 +16,14 @@ let OutgoBody = ({ rowBias, months, categories }) => (
     {categories.map(c => 
       <Row key={c.id}>
         <Cell className="budget-table__cell budget-table__cell--outgo">{c.name}</Cell>
-        {months.map(m => operation(m, c.id))}
+        {months.map(m => [
+          <Cell>
+            <Plan />
+          </Cell>,
+          <Cell>
+            <Fact />
+          </Cell>
+        ])}
       </Row>
     )}
   </Body>

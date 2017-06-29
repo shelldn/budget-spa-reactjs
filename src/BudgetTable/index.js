@@ -9,7 +9,6 @@ const BudgetTable = () => (
   <Table>
     <Head />
     <IncomeBody />
-    <OutgoBody />
   </Table>
 );
 
