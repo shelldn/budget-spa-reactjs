@@ -1,33 +1,5 @@
 const FETCH = 'budget-io/operations/FETCH';
-const EDIT = 'budget-io/operations/EDIT';
-const CHANGE = 'budget-io/operations/CHANGE';
 const COMMIT = 'budget-io/operations/COMMIT';
-
-export const editId = (state = {}, action) => {
-  switch (action.type) {
-    case EDIT:
-      return {
-        ...state,
-        id: action.payload.id,
-        type: action.payload.type,
-        value: action.payload.value
-      };
-
-    case CHANGE:
-      return {
-        ...state,
-        id: action.payload.id,
-        type: action.payload.type,
-        value: action.payload.value
-      };
-
-    case COMMIT:
-      return {};
-    
-    default:
-      return state;
-  }
-}
 
 const operation = (state, action) => {
   switch (action.type) {

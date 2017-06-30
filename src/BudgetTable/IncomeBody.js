@@ -13,7 +13,6 @@ const createIfNotExists = (operations, month) => (
 let IncomeBody = ({
   editId,
   editType,
-  editValue,
   months,
   categories,
   operations,
@@ -35,10 +34,10 @@ let IncomeBody = ({
         <Cell className="budget-table__cell budget-table__cell--income">{c.name}</Cell>
         {months.map(m => createIfNotExists(operations, m)).map(o => [
           <Cell>
-            <Plan id={o.id} editId={editId} editType={editType} editValue={editValue} value={o.plan} onEdit={onOperationEdit} onChange={onOperationChange} onCommit={onOperationCommit} />
+            <Plan id={o.id} editId={editId} editType={editType} value={o.plan} onEdit={onOperationEdit} onChange={onOperationChange} onCommit={onOperationCommit} />
           </Cell>,
           <Cell>
-            <Fact id={o.id} editId={editId} editType={editType} editValue={editValue} value={o.fact} onEdit={onOperationEdit} onChange={onOperationChange} onCommit={onOperationCommit} />
+            <Fact id={o.id} editId={editId} editType={editType} value={o.fact} onEdit={onOperationEdit} onChange={onOperationChange} onCommit={onOperationCommit} />
           </Cell>
         ])}
       </Row>
@@ -54,9 +53,8 @@ const sort = (categories) => categories
   .sort((a, b) => a.order > b.order);
 
 const mapStateToProps = (state) => ({
-  editId: state.editId.id,
-  editType: state.editId.type,
-  editValue: state.editId.value,
+  editId: state.edit.id,
+  editType: state.edit.type,
   months: state.months,
   categories: sort(filter(state.categories.list)),
   operations: state.operations

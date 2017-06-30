@@ -1,19 +1,26 @@
 import React from 'react';
+import Edit from './Edit';
 
-const Edit = ({ id, type, value, onChange, onCommit }) => (
-  <input
-    autoFocus
-    value={value}
-    onChange={e => onChange(id, type, e.target.value)}
-    onKeyPress={e => { if (e.key === 'Enter') onCommit(id, type, value); }}
-  />
-)
+const value = (type) => ({
+  id,
+  editId,
+  editType,
+  value,
+  onEdit,
+  onChange,
+  onCommit
+}) => {
 
-const value = (type) => ({ id, editId, editType, editValue, value, onEdit, onChange, onCommit }) => (
-  id === editId && type === editType
-    ? <Edit id={id} type={type} value={editValue} onChange={onChange} onCommit={onCommit} />
-    : <span onDoubleClick={() => onEdit(id, type, value)}>{value}</span>
-)
+  const isEditing =
+    id === editId &&
+    type === editType;
+
+  const handleDoubleClick = () => onEdit(id, type, value);
+
+  return isEditing
+    ? <Edit />
+    : <span onDoubleClick={handleDoubleClick}>{value}</span>
+}
 
 export const Plan = value('plan');
 export const Fact = value('fact');
