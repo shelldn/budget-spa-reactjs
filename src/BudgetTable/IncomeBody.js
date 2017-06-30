@@ -1,5 +1,6 @@
 import React from 'react';
 import { Body, Row, Cell } from '../Table';
+import Category from '../Category';
 import { Plan, Fact } from '../Operation';
 import { connect } from 'react-redux';
 
@@ -11,11 +12,13 @@ const createIfNotExists = (operations, month) => (
 )
 
 let IncomeBody = ({
+  categoryEditId,
   editId,
   editType,
   months,
   categories,
   operations,
+  onCategoryEdit,
   onOperationEdit
 }) => (
 
@@ -29,7 +32,9 @@ let IncomeBody = ({
     </Row>
     {categories.map(c => 
       <Row key={c.id}>
-        <Cell className="budget-table__cell budget-table__cell--income">{c.name}</Cell>
+        <Cell className="budget-table__cell budget-table__cell--income">
+          <Category editId={categoryEditId} id={c.id} name={c.name} onEdit={onCategoryEdit} />
+        </Cell>
         {months.map(m => createIfNotExists(operations, m)).map(o => [
           <Cell>
             <Plan id={o.id} editId={editId} editType={editType} value={o.plan} onEdit={onOperationEdit} />
@@ -51,6 +56,7 @@ const sort = (categories) => categories
   .sort((a, b) => a.order > b.order);
 
 const mapStateToProps = (state) => ({
+  categoryEditId: state.categories.edit.id,
   editId: state.edit.id,
   editType: state.edit.type,
   months: state.months,
@@ -59,6 +65,15 @@ const mapStateToProps = (state) => ({
 })
 
 const mapDispatchToProps = (dispatch) => ({
+
+  onCategoryEdit: (id, name) => dispatch({
+    type: 'budget-io/categories/EDIT',
+    payload: {
+      id,
+      name
+    }
+  }),
+
   onOperationEdit: (id, type, value) => dispatch({
     type: 'budget-io/operations/EDIT',
     payload: {

@@ -28,7 +28,7 @@ const EDIT = `${prefix}/EDIT`;
 const EDIT_EDIT = `${prefix}/to_edit/EDIT`;
 const EDIT_DISCARD = `${prefix}/to_edit/DISCARD`;
 
-const edit = (state = null, action) => {
+const edit = (state = {}, action) => {
   switch (action.type) {
     
     case EDIT:
