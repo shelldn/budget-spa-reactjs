@@ -16,9 +16,7 @@ let IncomeBody = ({
   months,
   categories,
   operations,
-  onOperationEdit,
-  onOperationChange,
-  onOperationCommit
+  onOperationEdit
 }) => (
 
   <Body>
@@ -34,10 +32,10 @@ let IncomeBody = ({
         <Cell className="budget-table__cell budget-table__cell--income">{c.name}</Cell>
         {months.map(m => createIfNotExists(operations, m)).map(o => [
           <Cell>
-            <Plan id={o.id} editId={editId} editType={editType} value={o.plan} onEdit={onOperationEdit} onChange={onOperationChange} onCommit={onOperationCommit} />
+            <Plan id={o.id} editId={editId} editType={editType} value={o.plan} onEdit={onOperationEdit} />
           </Cell>,
           <Cell>
-            <Fact id={o.id} editId={editId} editType={editType} value={o.fact} onEdit={onOperationEdit} onChange={onOperationChange} onCommit={onOperationCommit} />
+            <Fact id={o.id} editId={editId} editType={editType} value={o.fact} onEdit={onOperationEdit} />
           </Cell>
         ])}
       </Row>
@@ -68,25 +66,8 @@ const mapDispatchToProps = (dispatch) => ({
       type,
       value
     }
-  }),
-
-  onOperationChange: (id, type, value) => dispatch({
-    type: 'budget-io/operations/CHANGE',
-    payload: {
-      id,
-      type,
-      value
-    }
-  }),
-
-  onOperationCommit: (id, type, value) => dispatch({
-    type: 'budget-io/operations/COMMIT',
-    payload: {
-      id,
-      type,
-      value
-    }
   })
+
 });
 
 IncomeBody = connect(

@@ -6,9 +6,7 @@ const value = (type) => ({
   editId,
   editType,
   value,
-  onEdit,
-  onChange,
-  onCommit
+  onEdit
 }) => {
 
   const isEditing =
