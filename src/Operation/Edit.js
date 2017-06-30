@@ -6,18 +6,19 @@ let Edit = ({
   id,
   type,
   value,
-  change,
-  commit
+  onChange,
+  onCommit
 }) => {
 
-  const handleSubmit = () => commit(id, type, value);
+  const handleSubmit = () => onCommit(id, type, value);
 
   return (
     <form onSubmit={handleSubmit}>
       <input
         autoFocus
         value={value}
-        onChange={e => change(e.target.value)}
+        onFocus={e => e.target.select()}
+        onChange={e => onChange(e.target.value)}
       />
     </form>
   );
@@ -30,8 +31,8 @@ const mapStateToProps = (state) => ({
 })
 
 const mapDispatchToProps = {
-  change,
-  commit
+  onChange: change,
+  onCommit: commit
 };
 
 Edit = connect(
