@@ -7,14 +7,13 @@ import { Provider } from 'react-redux';
 import rootReducer from './reducer';
 import { HashRouter as Router, Route } from 'react-router-dom';
 import { fetchCategories } from './categories';
+import { fetchOperations } from './operations';
 import BudgetTable from './BudgetTable';
 import registerServiceWorker from './registerServiceWorker';
 import './index.css';
 
 const initialState = {
-  months: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
-  categories: [],
-  operations: []
+  months: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
 };
 
 const store = createStore(rootReducer, initialState, applyMiddleware(thunk, logger));
@@ -22,12 +21,7 @@ const store = createStore(rootReducer, initialState, applyMiddleware(thunk, logg
 const token = process.env.REACT_APP_TOKEN;
 
 store.dispatch(fetchCategories(token, 2017));
-
-fetch('http://localhost:8080/api/budgets/2017/operations', {
-  headers: {
-    'Authorization': `Bearer ${token}`
-  }
-}).then(response => response.json().then(operations => store.dispatch({ type: 'budget-io/operations/FETCH', payload: operations })));
+store.dispatch(fetchOperations(token, 2017));
 
 document.addEventListener('keydown', e => {
   let type;
@@ -45,7 +39,7 @@ document.addEventListener('keydown', e => {
       type = 'budget-io/table/col/PREVIOUS';
       break;
 
-    case 39:
+    case 39: // Right
       type = 'budget-io/table/col/NEXT';
       break;
 

@@ -1,6 +1,19 @@
 const FETCH = 'budget-io/operations/FETCH';
 const COMMIT = 'budget-io/operations/COMMIT';
 
+const fetchOperationsSuccess = (payload) => ({
+  type: FETCH,
+  payload
+})
+
+export const fetchOperations = (token, year) => (dispatch) => {
+  fetch('http://localhost:8080/api/budgets/2017/operations', {
+    headers: {
+      'Authorization': `Bearer ${token}`
+    }
+  }).then(r => r.json().then(operations => dispatch(fetchOperationsSuccess(operations))));
+}
+
 const operation = (state, action) => {
   switch (action.type) {
     case COMMIT:
