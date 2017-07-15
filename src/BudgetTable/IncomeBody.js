@@ -1,7 +1,6 @@
 import React from 'react';
 import { Body, Row, Cell } from '../Table';
 import Edit from '../Operation/Edit';
-import { connect } from 'react-redux';
 
 const createIfNotExists = (operations, month) => (
   operations.find(o => o.monthId === month) || {
@@ -10,7 +9,7 @@ const createIfNotExists = (operations, month) => (
   }
 )
 
-let IncomeBody = ({
+const IncomeBody = ({
   months,
   categories,
   operations
@@ -40,21 +39,5 @@ let IncomeBody = ({
   </Body>
 
 );
-
-const filter = (categories) => categories
-  .filter(c => c.type === 'income');
-  
-const sort = (categories) => categories
-  .sort((a, b) => a.order > b.order);
-
-const mapStateToProps = (state) => ({
-  months: state.months,
-  categories: sort(filter(state.categories.list)),
-  operations: state.operations
-})
-
-IncomeBody = connect(
-  mapStateToProps
-)(IncomeBody);
 
 export default IncomeBody;
