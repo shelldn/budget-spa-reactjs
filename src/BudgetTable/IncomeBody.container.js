@@ -9,7 +9,7 @@ const sort = (categories) => categories
 
 const mapStateToProps = (state) => ({
   months: state.months,
-  categories: sort(filter(state.categories.list)),
+  categories: sort(filter(state.categories)),
   operations: state.operations
 })
 

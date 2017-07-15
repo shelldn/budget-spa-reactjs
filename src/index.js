@@ -2,31 +2,26 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { createStore, applyMiddleware } from 'redux';
 import logger from 'redux-logger';
+import thunk from 'redux-thunk';
 import { Provider } from 'react-redux';
 import rootReducer from './reducer';
 import { HashRouter as Router, Route } from 'react-router-dom';
+import { fetchCategories } from './categories';
 import BudgetTable from './BudgetTable';
 import registerServiceWorker from './registerServiceWorker';
 import './index.css';
 
 const initialState = {
   months: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
-  categories: {
-    list: [],
-    add: null
-  },
+  categories: [],
   operations: []
 };
 
-const store = createStore(rootReducer, initialState, applyMiddleware(logger));
+const store = createStore(rootReducer, initialState, applyMiddleware(thunk, logger));
 
 const token = process.env.REACT_APP_TOKEN;
 
-fetch('http://localhost:8080/api/budgets/2017/categories', {
-  headers: {
-    'Authorization': `Bearer ${token}`
-  }
-}).then(response => response.json().then(categories => { store.dispatch({ type: 'budget-io/categories/FETCH', payload: categories }); }));
+store.dispatch(fetchCategories(token, 2017));
 
 fetch('http://localhost:8080/api/budgets/2017/operations', {
   headers: {
