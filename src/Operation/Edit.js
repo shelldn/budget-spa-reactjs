@@ -11,7 +11,6 @@ let Edit = ({
     <input
       autoFocus
       value={value}
-      onFocus={e => e.target.select()}
       onChange={e => onChange(e.target.value)}
     />
   </form>

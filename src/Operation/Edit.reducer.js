@@ -1,36 +1,23 @@
-const EDIT = 'budget-io/operations/EDIT';
-const CHANGE = 'budget-io/operations/CHANGE';
-const COMMIT = 'budget-io/operations/COMMIT';
+const CHANGE = 'budget-io/operation/edit/CHANGE';
 
-export const change = (value) => ({
+export const changeOperation = (value) => ({
   type: CHANGE,
   payload: {
     value
   }
 })
 
-export const commit = (id, type, value) => ({
-  type: COMMIT,
-  payload: {
-    id,
-    type,
-    value
-  }
-})
+const initialState = {
+  value: ''
+}
 
-const reducer = (state = {}, action) => {
+const reducer = (state = initialState, action) => {
   switch (action.type) {
-    case EDIT:
-      return action.payload;
-
     case CHANGE:
       return {
         ...state,
         value: action.payload.value
       };
-
-    case COMMIT:
-      return {};
     
     default:
       return state;
