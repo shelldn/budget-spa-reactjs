@@ -15,25 +15,47 @@ class Cell extends Component {
 
   render() {
     const {
+      contentId,
+      editor,
       className,
       selected,
       row,
-      colSpan,
       children,
-      onSelect
+      onSelect,
+      onEdit,
+      ...props
     } = this.props;
 
     const isSelected = selected.row === row && selected.col === this._col;
+    const isEditing = editor && isSelected && selected.isEditing;
 
-    return (
+    const handleClick = e => {
+      onSelect(this._col);
+    }
+
+    const Display = () => (
       <td
-        colSpan={colSpan}
         className={`cell${isSelected ? ' cell--selected' : ''} ${className}`}
-        onClick={() => onSelect(this._col)}
+        onClick={handleClick}
+        onDoubleClick={() => onEdit(this._col)}
+        {...props}
       >
         {children}
       </td>
-    );
+    )
+  
+    const Editor = editor;
+
+    const Edit = () => (
+      <td
+        className={`cell${isSelected ? ' cell--selected' : ''} ${className}`}
+        {...props}
+      >
+        <Editor />
+      </td>
+    )
+
+    return isEditing ? <Edit /> : <Display />;
   }
 }
 
@@ -46,6 +68,14 @@ const mapStateToProps = (state, props) => {
 const mapDispatchToProps = (dispatch, props) => ({
   onSelect: (col) => dispatch({
     type: 'budget-io/table/cell/SELECT',
+    payload: {
+      row: props.row,
+      col
+    }
+  }),
+
+  onEdit: (col) => dispatch({
+    type: 'budget-io/table/cell/EDIT',
     payload: {
       row: props.row,
       col

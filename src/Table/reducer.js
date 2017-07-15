@@ -1,5 +1,6 @@
 const REGISTER = 'budget-io/table/body/REGISTER';
 const SELECT = 'budget-io/table/cell/SELECT';
+const EDIT = 'budget-io/table/cell/EDIT';
 const PREVIOUS = 'budget-io/table/row/PREVIOUS';
 const NEXT = 'budget-io/table/row/NEXT';
 const LEFT = 'budget-io/table/col/PREVIOUS';
@@ -43,8 +44,17 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         row: action.payload.row,
-        col: action.payload.col
+        col: action.payload.col,
+        isEditing: false
       }
+
+    case EDIT:
+      return {
+        ...state,
+        row: action.payload.row,
+        col: action.payload.col,
+        isEditing: true
+      };
 
     case PREVIOUS:
       return {
