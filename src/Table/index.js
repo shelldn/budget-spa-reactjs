@@ -1,7 +1,7 @@
 import React from 'react';
 import Body from './Body';
 import Row from './Row';
-import Cell from './Cell';
+import Cell from './Cell.container';
 import cellReducer from './Cell.reducer';
 import { combineReducers } from 'redux';
 import './Table.css';

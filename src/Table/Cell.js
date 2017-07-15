@@ -1,6 +1,4 @@
 import React, { Component } from 'react';
-import { editCell } from './Cell.reducer';
-import { connect } from 'react-redux';
 import './Cell.css';
 
 let idx = 0;
@@ -16,6 +14,7 @@ class Cell extends Component {
 
   render() {
     const {
+      isEditing,
       contentId,
       editor,
       selected,
@@ -42,17 +41,8 @@ class Cell extends Component {
       </td>
     )
 
-    return <Display />;
+    return isEditing(this._col) ? <Edit /> : <Display />;
   }
 }
-
-const mapDispatchToProps = {
-  onEdit: editCell
-};
-
-Cell = connect(
-  null,
-  mapDispatchToProps
-)(Cell);
 
 export default Cell;
