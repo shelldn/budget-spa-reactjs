@@ -1,6 +1,5 @@
-import categories from './categories/reducer';
-import operations from './operations/reducer';
-import edit from './Operation/Edit.reducer';
+import { reducer as categories } from './categories';
+import { reducer as operations } from './operations';
 import { reducer as table } from './Table';
 import { combineReducers } from 'redux';
 
@@ -8,6 +7,5 @@ export default combineReducers({
   months: (state = []) => state,
   categories,
   operations,
-  edit,
   table
 });

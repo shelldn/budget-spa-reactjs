@@ -17,7 +17,7 @@ const operation = (state, action) => {
   }
 };
 
-const operations = (state = [], action) => {
+export const reducer = (state = [], action) => {
   switch (action.type) {
     case FETCH:
       return action.payload;    
@@ -28,6 +28,4 @@ const operations = (state = [], action) => {
     default:
       return state;      
   }
-}
-
-export default operations;
+};

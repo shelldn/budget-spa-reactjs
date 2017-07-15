@@ -83,7 +83,7 @@ const list = (state = [], action) => {
   }
 };
 
-export default combineReducers({
+export const reducer = combineReducers({
   list,
   add,
   edit
