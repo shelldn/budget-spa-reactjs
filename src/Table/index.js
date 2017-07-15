@@ -2,6 +2,8 @@ import React from 'react';
 import Body from './Body';
 import Row from './Row';
 import Cell from './Cell';
+import cellReducer from './Cell.reducer';
+import { combineReducers } from 'redux';
 import './Table.css';
 
 const Table = ({ children }) => {
@@ -15,3 +17,7 @@ const Table = ({ children }) => {
 export default Table;
 
 export { Body, Row, Cell };
+
+export const reducer = combineReducers({
+  cell: cellReducer
+});

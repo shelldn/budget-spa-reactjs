@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { editCell } from './Cell.reducer';
 import { connect } from 'react-redux';
 import './Cell.css';
 
@@ -17,27 +18,16 @@ class Cell extends Component {
     const {
       contentId,
       editor,
-      className,
       selected,
       row,
       children,
-      onSelect,
       onEdit,
       ...props
     } = this.props;
 
-    const isSelected = selected.row === row && selected.col === this._col;
-    const isEditing = editor && isSelected && selected.isEditing;
-
-    const handleClick = e => {
-      onSelect(this._col);
-    }
-
     const Display = () => (
       <td
-        className={`cell${isSelected ? ' cell--selected' : ''} ${className}`}
-        onClick={handleClick}
-        onDoubleClick={() => onEdit(this._col)}
+        onDoubleClick={() => onEdit(row, this._col)}
         {...props}
       >
         {children}
@@ -47,44 +37,21 @@ class Cell extends Component {
     const Editor = editor;
 
     const Edit = () => (
-      <td
-        className={`cell${isSelected ? ' cell--selected' : ''} ${className}`}
-        {...props}
-      >
+      <td {...props}>
         <Editor />
       </td>
     )
 
-    return isEditing ? <Edit /> : <Display />;
+    return <Display />;
   }
 }
 
-const mapStateToProps = (state, props) => {
-  return { 
-    selected: state.table
-  };
-}
-
-const mapDispatchToProps = (dispatch, props) => ({
-  onSelect: (col) => dispatch({
-    type: 'budget-io/table/cell/SELECT',
-    payload: {
-      row: props.row,
-      col
-    }
-  }),
-
-  onEdit: (col) => dispatch({
-    type: 'budget-io/table/cell/EDIT',
-    payload: {
-      row: props.row,
-      col
-    }
-  })
-});
+const mapDispatchToProps = {
+  onEdit: editCell
+};
 
 Cell = connect(
-  mapStateToProps,
+  null,
   mapDispatchToProps
 )(Cell);
 
