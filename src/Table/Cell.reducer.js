@@ -1,10 +1,11 @@
-const EDIT = 'budget-io/table/cell/EDIT';
+export const EDIT = 'budget-io/table/cell/EDIT';
 
-export const editCell = (row, col) => ({
+export const editCell = (row, col, value) => ({
   type: EDIT,
   payload: {
     row,
-    col
+    col,
+    value
   }
 });
 

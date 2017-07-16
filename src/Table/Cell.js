@@ -15,10 +15,10 @@ class Cell extends Component {
   render() {
     const {
       isEditing,
-      contentId,
       editor,
       selected,
       row,
+      value,
       children,
       onEdit,
       ...props
@@ -26,7 +26,7 @@ class Cell extends Component {
 
     const Display = () => (
       <td
-        onDoubleClick={() => onEdit(row, this._col)}
+        onDoubleClick={() => onEdit(row, this._col, value)}
         {...props}
       >
         {children}

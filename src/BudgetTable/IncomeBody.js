@@ -29,7 +29,7 @@ const IncomeBody = ({
           {c.name}
         </Cell>
         {months.map(m => createIfNotExists(operations, m)).map(o => [
-          <Cell contentId={o.id} editor={Edit}>
+          <Cell editor={Edit} value={o.plan}>
             {o.plan}
           </Cell>,
           <Cell>{o.fact}</Cell>
