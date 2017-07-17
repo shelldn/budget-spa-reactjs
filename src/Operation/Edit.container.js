@@ -7,7 +7,7 @@ const mapStateToProps = (state) => ({
 })
 
 const mapDispatchToProps = {
-  onChange: changeOperation,
+  onChange: changeOperation
 };
 
 const EditContainer = connect(

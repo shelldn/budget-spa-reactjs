@@ -21,6 +21,7 @@ class Cell extends Component {
       value,
       children,
       onEdit,
+      onEditCommit,
       ...props
     } = this.props;
 
@@ -37,7 +38,7 @@ class Cell extends Component {
 
     const Edit = () => (
       <td {...props}>
-        <Editor />
+        <Editor onCommit={() => onEditCommit(row, this._col)} />
       </td>
     )
 

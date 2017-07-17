@@ -1,13 +1,14 @@
 import Cell from './Cell';
-import { editCell } from './Cell.reducer';
+import { editCell, resetCell } from './Cell.reducer';
 import { connect } from 'react-redux';
 
 const mapStateToProps = (state, props) => ({
-  isEditing: (col) => state.table && state.table.cell && state.table.cell.row === props.row && state.table.cell.col === col
+  isEditing: (col) => state.table && state.table.cell && state.table.cell.isEditing && state.table.cell.row === props.row && state.table.cell.col === col
 });
 
 const mapDispatchToProps = {
-  onEdit: editCell
+  onEdit: editCell,
+  onEditCommit: resetCell
 };
 
 const CellContainer = connect(

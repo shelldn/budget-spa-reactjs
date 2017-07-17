@@ -7,11 +7,11 @@ export const changeOperation = (value) => ({
   payload: {
     value
   }
-})
+});
 
 const initialState = {
   value: ''
-}
+};
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
