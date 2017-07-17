@@ -1,5 +1,5 @@
 export const EDIT = 'budget-io/table/cell/EDIT';
-const RESET = 'budget-io/table/cell/RESET';
+const COMMIT = 'budget-io/table/cell/COMMIT';
 
 export const editCell = (row, col, value) => ({
   type: EDIT,
@@ -10,8 +10,8 @@ export const editCell = (row, col, value) => ({
   }
 });
 
-export const resetCell = (row, col) => ({
-  type: RESET,
+export const commitCell = (row, col) => ({
+  type: COMMIT,
   payload: {
     row,
     col
@@ -27,7 +27,7 @@ const cell = (state = null, action) => {
         isEditing: true
       };
 
-    case RESET:
+    case COMMIT:
       return {
         row: action.payload.row,
         col: action.payload.col,

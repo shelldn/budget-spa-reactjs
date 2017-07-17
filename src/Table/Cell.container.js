@@ -1,5 +1,5 @@
 import Cell from './Cell';
-import { editCell, resetCell } from './Cell.reducer';
+import { editCell, commitCell } from './Cell.reducer';
 import { connect } from 'react-redux';
 
 const mapStateToProps = (state, props) => ({
@@ -8,7 +8,7 @@ const mapStateToProps = (state, props) => ({
 
 const mapDispatchToProps = {
   onEdit: editCell,
-  onEditCommit: resetCell
+  onCommit: commitCell
 };
 
 const CellContainer = connect(
