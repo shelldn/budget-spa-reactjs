@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, cloneElement } from 'react';
 import './Cell.css';
 
 let idx = 0;
@@ -34,11 +34,9 @@ class Cell extends Component {
       </td>
     )
   
-    const Editor = editor;
-
     const Edit = () => (
-      <td {...props}>
-        <Editor onCommit={() => onCommit(row, this._col)} />
+      <td>
+        {cloneElement(editor, { onCommit: () => onCommit(row, this._col) })}
       </td>
     )
 

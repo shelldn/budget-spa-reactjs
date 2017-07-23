@@ -7,7 +7,7 @@ let Edit = ({
   onChange,
   onCommit
 }) => (
-  <form onSubmit={() => onCommit(id, type, value)}>
+  <form onSubmit={() => onCommit()}>
     <input
       autoFocus
       value={value}
