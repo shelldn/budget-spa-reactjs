@@ -8,7 +8,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch, props) => ({
   onChange: (...args) => dispatch(changeOperation(...args)),
-  onCommit: () => dispatch(commitOperation(props.id, props.onCommit))
+  onCommit: (value) => dispatch(commitOperation(props.id, value, props.onCommit))
 });
 
 const EditContainer = connect(

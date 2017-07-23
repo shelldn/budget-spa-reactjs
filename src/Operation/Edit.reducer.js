@@ -2,6 +2,7 @@ import { token } from '../index.js';
 import { EDIT } from '../Table/Cell.reducer';
 
 const CHANGE = 'budget-io/operation/edit/CHANGE';
+const COMMIT = 'budget-io/operation/edit/COMMIT';
 
 export const changeOperation = (value) => ({
   type: CHANGE,
@@ -10,15 +11,23 @@ export const changeOperation = (value) => ({
   }
 });
 
-export const commitOperation = (id, cb) => (dispatch) => {
+export const commitOperation = (id, value, cb) => (dispatch) => {
   fetch(`http://localhost:8080/api/operations/${id}`, {
     method: 'PATCH',
     headers: {
-      'Authorization': `Bearer ${token}`
-    }    
-  });
-
-  cb();
+      'Authorization': `Bearer ${token}`,
+      'Content-Type': 'application/json-patch+json'
+    },
+    body: JSON.stringify([
+      {
+        op: 'replace',
+        path: '/plan',
+        value
+      }
+    ])
+  }).then(() => dispatch({
+    type: COMMIT
+  })).then(() => cb());
 };
 
 const initialState = {
