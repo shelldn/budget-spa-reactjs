@@ -18,7 +18,7 @@ const initialState = {
 
 const store = createStore(rootReducer, initialState, applyMiddleware(thunk, logger));
 
-const token = process.env.REACT_APP_TOKEN;
+export const token = process.env.REACT_APP_TOKEN;
 
 store.dispatch(fetchCategories(token, 2017));
 store.dispatch(fetchOperations(token, 2017));

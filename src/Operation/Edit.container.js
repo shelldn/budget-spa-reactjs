@@ -1,14 +1,15 @@
 import Edit from './Edit';
-import { changeOperation } from './Edit.reducer';
+import { changeOperation, commitOperation } from './Edit.reducer';
 import { connect } from 'react-redux';
 
 const mapStateToProps = (state) => ({
   value: state.operationEdit.value
 })
 
-const mapDispatchToProps = {
-  onChange: changeOperation
-};
+const mapDispatchToProps = (dispatch, props) => ({
+  onChange: (...args) => dispatch(changeOperation(...args)),
+  onCommit: () => dispatch(commitOperation(props.id, props.onCommit))
+});
 
 const EditContainer = connect(
   mapStateToProps,

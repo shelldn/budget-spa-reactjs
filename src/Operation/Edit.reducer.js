@@ -1,3 +1,4 @@
+import { token } from '../index.js';
 import { EDIT } from '../Table/Cell.reducer';
 
 const CHANGE = 'budget-io/operation/edit/CHANGE';
@@ -8,6 +9,17 @@ export const changeOperation = (value) => ({
     value
   }
 });
+
+export const commitOperation = (id, cb) => (dispatch) => {
+  fetch(`http://localhost:8080/api/operations/${id}`, {
+    method: 'PATCH',
+    headers: {
+      'Authorization': `Bearer ${token}`
+    }    
+  });
+
+  cb();
+};
 
 const initialState = {
   value: ''
