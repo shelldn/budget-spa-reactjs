@@ -10,12 +10,8 @@ export const editCell = (row, col, value) => ({
   }
 });
 
-export const commitCell = (row, col) => ({
-  type: COMMIT,
-  payload: {
-    row,
-    col
-  }
+export const commitCell = () => ({
+  type: COMMIT
 });
 
 const cell = (state = null, action) => {
@@ -28,11 +24,7 @@ const cell = (state = null, action) => {
       };
 
     case COMMIT:
-      return {
-        row: action.payload.row,
-        col: action.payload.col,
-        isEditing: false
-      };
+      return null;
 
     default:
       return state;

@@ -37,7 +37,7 @@ class Cell extends Component {
     const Edit = () => (
       <td>
         {cloneElement(editor, {
-          onCommit: () => onCommit(row, this._col)
+          onCommit
         })}
       </td>
     )
