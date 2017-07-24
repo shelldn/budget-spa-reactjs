@@ -2,7 +2,7 @@ import { token } from '../index.js';
 import { EDIT } from '../Table/Cell.reducer';
 
 const CHANGE = 'budget-io/operation/edit/CHANGE';
-const COMMIT = 'budget-io/operation/edit/COMMIT';
+export const COMMIT = 'budget-io/operation/edit/COMMIT';
 
 export const changeOperation = (value) => ({
   type: CHANGE,
@@ -26,7 +26,11 @@ export const commitOperation = (id, value, cb) => (dispatch) => {
       }
     ])
   }).then(() => dispatch({
-    type: COMMIT
+    type: COMMIT,
+    payload: {
+      id,
+      value
+    }
   })).then(() => cb());
 };
 

@@ -1,5 +1,6 @@
+import { COMMIT } from '../Operation/Edit.reducer';
+
 const FETCH = 'budget-io/operations/FETCH';
-const COMMIT = 'budget-io/operations/COMMIT';
 
 const fetchOperationsSuccess = (payload) => ({
   type: FETCH,
@@ -22,7 +23,7 @@ const operation = (state, action) => {
 
       return {
         ...state,
-        [action.payload.type]: action.payload.value
+        plan: action.payload.value
       };
     
     default:
