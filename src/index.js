@@ -20,8 +20,10 @@ const store = createStore(rootReducer, initialState, applyMiddleware(thunk, logg
 
 export const token = process.env.REACT_APP_TOKEN;
 
-store.dispatch(fetchCategories(token, 2017));
-store.dispatch(fetchOperations(token, 2017));
+const year = (new Date()).getFullYear();
+
+store.dispatch(fetchCategories(token, year));
+store.dispatch(fetchOperations(token, year));
 
 document.addEventListener('keydown', e => {
   let type;

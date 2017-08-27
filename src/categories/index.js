@@ -6,7 +6,7 @@ const fetchCategoriesSuccess = (payload) => ({
 })
 
 export const fetchCategories = (token, year) => (dispatch) => {
-  fetch(`http://localhost:8080/api/budgets/${year}/categories`, {
+    fetch(`http://localhost:55283/api/budgets/${year}/categories`, {
     headers: {
       'Authorization': `Bearer ${token}`
     }
