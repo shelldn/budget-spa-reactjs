@@ -1,43 +1,25 @@
-import { COMMIT } from '../Operation/Edit.reducer';
+import { host, endpoints } from '../configuration';
 
 const FETCH = 'budget-io/operations/FETCH';
 
-const fetchOperationsSuccess = (payload) => ({
-  type: FETCH,
-  payload
-})
+export const fetchOperations = (token, year) => async (dispatch) => {
 
-export const fetchOperations = (token, year) => (dispatch) => {
-  fetch('http://localhost:55283/api/budgets/2017/operations', {
+  const response = await fetch(`${host}${endpoints.operationsUrl.replace(':year', 2017)}`, {
     headers: {
       'Authorization': `Bearer ${token}`
     }
-  }).then(r => r.json().then(operations => dispatch(fetchOperationsSuccess(operations))));
+  });
+
+  dispatch({
+    type: FETCH,
+    payload: await response.json()
+  });
 }
-
-const operation = (state, action) => {
-  switch (action.type) {
-    case COMMIT:
-      if (action.payload.id !== state.id)
-        return state;
-
-      return {
-        ...state,
-        plan: action.payload.value
-      };
-    
-    default:
-      return state;
-  }
-};
 
 export const reducer = (state = [], action) => {
   switch (action.type) {
     case FETCH:
       return action.payload;    
-
-    case COMMIT:
-      return state.map(o => operation(o, action));
 
     default:
       return state;      

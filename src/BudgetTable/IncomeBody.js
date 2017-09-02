@@ -1,6 +1,5 @@
 import React from 'react';
 import { Body, Row, Cell } from '../Table';
-import { Edit } from '../Operation';
 
 const createIfNotExists = (operations, categoryId, month) => (
   operations.find(o => o.categoryId === categoryId && o.month === month) || {
