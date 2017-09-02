@@ -1,5 +1,4 @@
 import { token } from '../index.js';
-import { EDIT } from '../Table/Cell.reducer';
 
 const CHANGE = 'budget-io/operation/edit/CHANGE';
 export const COMMIT = 'budget-io/operation/edit/COMMIT';
@@ -40,11 +39,6 @@ const initialState = {
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
-    case EDIT:
-      return {
-        ...state,
-        value: action.payload.value
-      };
 
     case CHANGE:
       return {

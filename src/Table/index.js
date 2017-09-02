@@ -1,9 +1,7 @@
 import React from 'react';
 import Body from './Body';
 import Row from './Row';
-import Cell from './Cell.container';
-import cellReducer from './Cell.reducer';
-import { combineReducers } from 'redux';
+import Cell from './Cell';
 import './Table.css';
 
 const Table = ({ children }) => {
@@ -17,7 +15,3 @@ const Table = ({ children }) => {
 export default Table;
 
 export { Body, Row, Cell };
-
-export const reducer = combineReducers({
-  cell: cellReducer
-});
