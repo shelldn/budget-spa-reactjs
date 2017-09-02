@@ -1,5 +1,4 @@
 import React from 'react';
-import { Body, Row, Cell } from '../Table';
 
 const createIfNotExists = (operations, categoryId, month) => (
   operations.find(o => o.categoryId === categoryId && o.month === month) || {
@@ -8,35 +7,33 @@ const createIfNotExists = (operations, categoryId, month) => (
   }
 )
 
-const OutgoBody = ({
+const Body = ({
   months,
   categories,
   operations
 }) => (
-  
-  <Body>
 
-    <Row>
-      <Cell></Cell>
+  <tbody>
+    <tr>
+      <td></td>
       {months.map(() => [
-        <Cell>0</Cell>,
-        <Cell>0</Cell>
+        <td>0</td>,
+        <td>0</td>
       ])}
-    </Row>
-
+    </tr>
     {categories.map(c => 
-      <Row key={c.id}>
-        <Cell>
+      <tr key={c.id}>
+        <td>
           {c.name}
-        </Cell>
-
+        </td>
         {months.map(m => createIfNotExists(operations, c.id, m)).map(o => [
-          <Cell>{o.plan}</Cell>,
-          <Cell>{o.fact}</Cell>
+          <td>{o.plan}</td>,
+          <td>{o.fact}</td>
         ])}
-      </Row>
+      </tr>
     )}
-  </Body>
+  </tbody>
+
 );
 
-export default OutgoBody;
+export default Body;

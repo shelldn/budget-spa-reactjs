@@ -1,24 +1,23 @@
 import React from 'react';
-import { Body, Row, Cell } from '../Table';
 import { connect } from 'react-redux';
 
 let Head = ({ months }) => (
 
-  <Body>
-    <Row>
-      <Cell />
+  <tbody>
+    <tr>
+      <td></td>
       {months.map(m => 
-        <Cell colSpan={2} key={m}>{['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'][m - 1]}</Cell>
+        <td colSpan={2} key={m}>{['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'][m - 1]}</td>
       )}
-    </Row>
-    <Row>
-      <Cell />
+    </tr>
+    <tr>
+      <td></td>
       {months.map(_ => [
-        <Cell>Plan</Cell>,
-        <Cell>Fact</Cell>
+        <td>Plan</td>,
+        <td>Fact</td>
       ])}
-    </Row>
-  </Body>
+    </tr>
+  </tbody>
 )
 
 const mapStateToProps = (state) => ({

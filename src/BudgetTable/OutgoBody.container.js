@@ -1,4 +1,4 @@
-import OutgoBody from './OutgoBody';
+import Body from './Body';
 import { connect } from 'react-redux';
 
 const mapStateToProps = (state) => ({
@@ -7,8 +7,8 @@ const mapStateToProps = (state) => ({
   operations: state.operations
 });
 
-const OutgoBodyContainer = connect(
+const OutgoBody = connect(
   mapStateToProps
-)(OutgoBody);
+)(Body);
 
-export default OutgoBodyContainer;
+export default OutgoBody;

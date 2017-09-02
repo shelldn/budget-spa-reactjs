@@ -1,20 +1,17 @@
-import IncomeBody from './IncomeBody';
+import Body from './Body';
 import { connect } from 'react-redux';
 
 const filter = (categories) => categories
   .filter(c => c.type === 'income');
   
-const sort = (categories) => categories
-  .sort((a, b) => a.order > b.order);
-
 const mapStateToProps = (state) => ({
   months: state.months,
-  categories: sort(filter(state.categories)),
+  categories: filter(state.categories),
   operations: state.operations
 })
 
-const IncomeBodyContainer = connect(
+const IncomeBody = connect(
   mapStateToProps
-)(IncomeBody);
+)(Body);
 
-export default IncomeBodyContainer;
+export default IncomeBody;
