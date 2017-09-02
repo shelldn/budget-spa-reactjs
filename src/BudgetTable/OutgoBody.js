@@ -1,8 +1,8 @@
 import React from 'react';
 import { Body, Row, Cell } from '../Table';
 
-const createIfNotExists = (operations, month) => (
-  operations.find(o => o.monthId === month) || {
+const createIfNotExists = (operations, categoryId, month) => (
+  operations.find(o => o.categoryId === categoryId && o.month === month) || {
     plan: 0,
     fact: 0
   }
@@ -30,7 +30,7 @@ const OutgoBody = ({
           {c.name}
         </Cell>
 
-        {months.map(m => createIfNotExists(operations, m)).map(o => [
+        {months.map(m => createIfNotExists(operations, c.id, m)).map(o => [
           <Cell>{o.plan}</Cell>,
           <Cell>{o.fact}</Cell>
         ])}
