@@ -32,7 +32,7 @@ document.addEventListener('keydown', e => {
     case 38: // Up
       type = 'budget-io/table/row/PREVIOUS';
       break;
-    
+
     case 40: // Down
       type = 'budget-io/table/row/NEXT';
       break;
@@ -49,9 +49,9 @@ document.addEventListener('keydown', e => {
       return;
   }
 
-  store.dispatch({
-    type
-  })
+    store.dispatch({
+        type
+    })
 });
 
 ReactDOM.render(
