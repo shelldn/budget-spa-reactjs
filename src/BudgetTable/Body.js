@@ -11,7 +11,8 @@ const Body = ({
   months,
   categories,
   operations,
-  addCategory
+  addCategory,
+  deleteCategory
 }) => (
 
   <tbody>
@@ -26,6 +27,9 @@ const Body = ({
       <tr key={c.id}>
         <td>
           {c.name}
+          <a href="javascript:void(0)" onClick={() => deleteCategory(c.id)}>
+            <i className="fa fa-trash-o"></i>
+          </a>
         </td>
         {months.map(m => createIfNotExists(operations, c.id, m)).map(o => [
           <td>{o.plan}</td>,

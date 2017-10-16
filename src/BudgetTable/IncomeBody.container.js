@@ -1,5 +1,5 @@
 import Body from './Body';
-import { addCategory } from './IncomeBody.reducer';
+import { addCategory, deleteCategory } from './IncomeBody.reducer';
 import { connect } from 'react-redux';
 
 const filter = (categories) => categories
@@ -9,10 +9,11 @@ const mapStateToProps = (state) => ({
   months: state.months,
   categories: filter(state.categories),
   operations: state.operations
-})
+});
 
 const mapDispatchToProps = ({
-  addCategory
+  addCategory,
+  deleteCategory
 });
 
 const IncomeBody = connect(
