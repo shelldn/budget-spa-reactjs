@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 
 const createIfNotExists = (operations, categoryId, month) => (
   operations.find(o => o.categoryId === categoryId && o.month === month) || {
@@ -7,11 +7,34 @@ const createIfNotExists = (operations, categoryId, month) => (
   }
 )
 
+class AddCategory extends Component {
+
+  handleSubmit(e) {
+    e.preventDefault();
+    this.props.onSubmit(this.input.value);
+  }
+
+  render() {
+
+    return (
+
+      <form onSubmit={this.handleSubmit.bind(this)}>
+        <input
+          autoFocus
+          ref={i => this.input = i}
+        />
+      </form>
+    );
+  }
+}
+
 const Body = ({
   months,
   categories,
+  category,
   operations,
   addCategory,
+  addCategoryCommit,
   deleteCategory
 }) => (
 
@@ -38,7 +61,11 @@ const Body = ({
       </tr>
     )}
     <tr>
-      <a href="javascript:void(0)" onClick={() => addCategory()}>Add category</a>
+      <td>
+        {category
+            ? <AddCategory onSubmit={addCategoryCommit} />
+            : <a href="javascript:void(0)" onClick={() => addCategory()}>Add category</a>}
+      </td>
     </tr>
   </tbody>
 
