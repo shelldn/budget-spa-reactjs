@@ -25,35 +25,6 @@ const year = (new Date()).getFullYear();
 store.dispatch(fetchCategories(token, year));
 store.dispatch(fetchOperations(token, year));
 
-document.addEventListener('keydown', e => {
-  let type;
-
-  switch (e.keyCode) {
-    case 38: // Up
-      type = 'budget-io/table/row/PREVIOUS';
-      break;
-
-    case 40: // Down
-      type = 'budget-io/table/row/NEXT';
-      break;
-
-    case 37: // Left
-      type = 'budget-io/table/col/PREVIOUS';
-      break;
-
-    case 39: // Right
-      type = 'budget-io/table/col/NEXT';
-      break;
-
-    default:
-      return;
-  }
-
-    store.dispatch({
-        type
-    })
-});
-
 ReactDOM.render(
   <Provider store={store}>
     <Router>
