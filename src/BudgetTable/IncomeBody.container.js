@@ -1,5 +1,5 @@
 import Body from './Body';
-import { addCategory, deleteCategory } from './IncomeBody.reducer';
+import { addCategory, deleteCategory } from '../categories';
 import { connect } from 'react-redux';
 
 const filter = (categories) => categories
