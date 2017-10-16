@@ -10,7 +10,8 @@ const createIfNotExists = (operations, categoryId, month) => (
 const Body = ({
   months,
   categories,
-  operations
+  operations,
+  addCategory
 }) => (
 
   <tbody>
@@ -32,6 +33,9 @@ const Body = ({
         ])}
       </tr>
     )}
+    <tr>
+      <a href="javascript:void(0)" onClick={() => addCategory()}>Add category</a>
+    </tr>
   </tbody>
 
 );

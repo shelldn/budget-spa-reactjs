@@ -1,4 +1,5 @@
 import Body from './Body';
+import { addCategory } from './IncomeBody.reducer';
 import { connect } from 'react-redux';
 
 const filter = (categories) => categories
@@ -10,8 +11,13 @@ const mapStateToProps = (state) => ({
   operations: state.operations
 })
 
+const mapDispatchToProps = ({
+  addCategory
+});
+
 const IncomeBody = connect(
-  mapStateToProps
+  mapStateToProps,
+  mapDispatchToProps
 )(Body);
 
 export default IncomeBody;
