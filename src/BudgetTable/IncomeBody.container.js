@@ -1,5 +1,11 @@
 import Body from './Body';
-import { addCategory, addCategoryCommit, deleteCategory } from '../categories';
+import {
+  addCategory,
+  addCategoryCommit,
+  editCategory,
+  editCategoryCommit,
+  deleteCategory
+} from '../categories';
 import { connect } from 'react-redux';
 
 const filter = (categories) => categories
@@ -15,6 +21,8 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = ({
   addCategory,
   addCategoryCommit,
+  editCategory,
+  editCategoryCommit,
   deleteCategory
 });
 

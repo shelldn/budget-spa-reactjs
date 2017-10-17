@@ -15,13 +15,54 @@ class AddCategory extends Component {
   }
 
   render() {
-
     return (
 
       <form onSubmit={this.handleSubmit.bind(this)}>
         <input
           autoFocus
           ref={i => this.input = i}
+        />
+      </form>
+    );
+  }
+}
+
+const DisplayCategory = ({
+  id,
+  name,
+  editCategory,
+  deleteCategory
+}) => (
+  <div>
+    {name}
+    <a href="javascript:void(0)" onClick={() => editCategory(id)}>
+      <i className="fa fa-pencil-square-o"></i>
+    </a>
+    <a href="javascript:void(0)" onClick={() => deleteCategory(id)}>
+      <i className="fa fa-trash-o"></i>
+    </a>
+  </div>
+);
+
+class EditCategory extends Component {
+
+  componentDidMount() {
+    this.input.select();
+  }
+
+  handleSubmit = (e) => {
+    e.preventDefault();
+    this.props.onSubmit(this.props.id, this.input.value);
+  }
+
+  render() {
+    return (
+
+      <form onSubmit={this.handleSubmit}>
+        <input
+          ref={i => this.input = i}
+          autoFocus
+          defaultValue={this.props.name}
         />
       </form>
     );
@@ -35,6 +76,8 @@ const Body = ({
   operations,
   addCategory,
   addCategoryCommit,
+  editCategory,
+  editCategoryCommit,
   deleteCategory
 }) => (
 
@@ -49,10 +92,9 @@ const Body = ({
     {categories.map(c => 
       <tr key={c.id}>
         <td>
-          {c.name}
-          <a href="javascript:void(0)" onClick={() => deleteCategory(c.id)}>
-            <i className="fa fa-trash-o"></i>
-          </a>
+          {c.isEditing
+              ? <EditCategory {...c} onSubmit={editCategoryCommit} />
+              : <DisplayCategory {...c} editCategory={editCategory} deleteCategory={deleteCategory} />}
         </td>
         {months.map(m => createIfNotExists(operations, c.id, m)).map(o => [
           <td>{o.plan}</td>,
