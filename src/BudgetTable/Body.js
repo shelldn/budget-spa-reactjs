@@ -1,4 +1,5 @@
-import React, { Component } from 'react';
+import React from 'react';
+import AddCategory from './AddCategory';
 import EditCategory from './EditCategory';
 
 const createIfNotExists = (operations, categoryId, month) => (
@@ -7,26 +8,6 @@ const createIfNotExists = (operations, categoryId, month) => (
     fact: 0
   }
 )
-
-class AddCategory extends Component {
-
-  handleSubmit(e) {
-    e.preventDefault();
-    this.props.onSubmit(this.input.value);
-  }
-
-  render() {
-    return (
-
-      <form onSubmit={this.handleSubmit.bind(this)}>
-        <input
-          autoFocus
-          ref={i => this.input = i}
-        />
-      </form>
-    );
-  }
-}
 
 const DisplayCategory = ({
   id,
