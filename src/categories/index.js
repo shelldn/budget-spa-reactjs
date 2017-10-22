@@ -74,8 +74,7 @@ const category = (state, action) => {
       if (!state.id)      
         return {
           ...state,
-          id: 1000,
-          name: action.payload.name
+          ...action.payload
         };
 
       return state;
