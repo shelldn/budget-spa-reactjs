@@ -17,10 +17,25 @@ export const addCategory = () => ({
   type: 'budget-io/categories/ADD'
 });
 
-export const addCategoryCommit = (name) => ({
-  type: 'budget-io/categories/add/COMMIT',
-  payload: { name }
-});
+export const addCategoryCommit = (name) => async (dispatch) => {
+  const response = await fetch('http://192.168.255.1:5000/api/budgets/2017/categories', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({ name })
+  });
+
+  if (response.status > 400)
+    throw new Error('Add category failure.');
+
+  const payload = await response.json();
+  
+  dispatch({
+    type: 'budget-io/categories/add/COMMIT',
+    payload
+  });
+}
 
 export const editCategory = (id) => ({
   type: 'budget-io/categories/EDIT',

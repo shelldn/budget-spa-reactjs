@@ -3,8 +3,8 @@ import React, { Component } from 'react';
 class AddCategory extends Component {
 
   handleSubmit(e) {
-    e.preventDefault();
     this.props.onSubmit(this.input.value);
+    e.preventDefault();
   }
 
   render() {
