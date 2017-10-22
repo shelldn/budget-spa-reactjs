@@ -41,12 +41,12 @@ const category = (state, action) => {
   switch (action.type) {
     case 'budget-io/categories/ADD':
       return {
-        id: -1,
+        id: '',
         type: 'income'        
       };
 
     case 'budget-io/categories/add/COMMIT':
-      if (state.id < 0)      
+      if (!state.id)      
         return {
           ...state,
           id: 1000,

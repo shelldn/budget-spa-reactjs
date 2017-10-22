@@ -9,12 +9,12 @@ import {
 import { connect } from 'react-redux';
 
 const filter = (categories) => categories
-  .filter(c => c.type === 'income' && c.id > 0);
+  .filter(c => c.type === 'income' && !!c.id);
   
 const mapStateToProps = (state) => ({
   months: state.months,
   categories: filter(state.categories),
-  category: state.categories.find(c => c.type === 'income' && c.id < 0),
+  category: state.categories.find(c => c.type === 'income' && !c.id),
   operations: state.operations
 });
 
