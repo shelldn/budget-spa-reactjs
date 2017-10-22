@@ -47,10 +47,20 @@ export const editCategoryCommit = (id, newName) => ({
   payload: { id, newName }
 });
 
-export const deleteCategory = (id) => ({
-  type: 'budget-io/categories/DELETE',
-  payload: { id }
-});
+export const deleteCategory = (id) => async (dispatch) => {
+
+  const response = await fetch(`http://192.168.255.1:5000/api/categories/${id}`, {
+    method: 'DELETE'
+  });
+
+  if (response.status > 400)
+    throw new Error('Delete category failure.');
+
+  dispatch({
+    type: 'budget-io/categories/DELETE',
+    payload: { id }
+  });
+};
 
 const category = (state, action) => {
   switch (action.type) {
