@@ -13,17 +13,18 @@ export const fetchCategories = (token, year) => (dispatch) => {
   }).then(r => r.json().then(categories => { dispatch(fetchCategoriesSuccess(categories)); }));
 }
 
-export const addCategory = () => ({
-  type: 'budget-io/categories/ADD'
+export const addCategory = (type) => ({
+  type: 'budget-io/categories/ADD',
+  payload: { type }
 });
 
-export const addCategoryCommit = (name) => async (dispatch) => {
+export const addCategoryCommit = (type, name) => async (dispatch) => {
   const response = await fetch('http://192.168.255.1:5000/api/budgets/2017/categories', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
     },
-    body: JSON.stringify({ name })
+    body: JSON.stringify({ type, name })
   });
 
   if (response.status >= 400)
@@ -80,7 +81,7 @@ const category = (state, action) => {
     case 'budget-io/categories/ADD':
       return {
         id: '',
-        type: 'income'        
+        type: action.payload.type
       };
 
     case 'budget-io/categories/add/COMMIT':

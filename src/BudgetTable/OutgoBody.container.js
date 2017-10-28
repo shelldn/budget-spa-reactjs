@@ -9,8 +9,10 @@ import {
 import { connect } from 'react-redux';
 
 const mapStateToProps = (state) => ({
+  type: 'outgo',
   months: state.months,
   categories: state.categories.filter(c => c.type === 'outgo'),
+  category: state.categories.find(c => c.type === 'outgo' && !c.id),
   operations: state.operations
 });
 

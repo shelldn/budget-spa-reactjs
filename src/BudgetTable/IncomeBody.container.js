@@ -12,6 +12,7 @@ const filter = (categories) => categories
   .filter(c => c.type === 'income' && !!c.id);
   
 const mapStateToProps = (state) => ({
+  type: 'income',
   months: state.months,
   categories: filter(state.categories),
   category: state.categories.find(c => c.type === 'income' && !c.id),

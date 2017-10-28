@@ -11,6 +11,7 @@ const createIfNotExists = (operations, categoryId, month) => (
 )
 
 const Body = ({
+  type,
   months,
   categories,
   category,
@@ -46,8 +47,8 @@ const Body = ({
     <tr>
       <td>
         {category
-            ? <AddCategory onSubmit={addCategoryCommit} />
-            : <a href="javascript:void(0)" onClick={() => addCategory()}>Add category</a>}
+            ? <AddCategory onSubmit={name => addCategoryCommit(type, name)} />
+            : <a href="javascript:void(0)" onClick={() => addCategory(type)}>Add category</a>}
       </td>
     </tr>
   </tbody>
