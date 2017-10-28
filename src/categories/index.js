@@ -26,7 +26,7 @@ export const addCategoryCommit = (name) => async (dispatch) => {
     body: JSON.stringify({ name })
   });
 
-  if (response.status > 400)
+  if (response.status >= 400)
     throw new Error('Add category failure.');
 
   const payload = await response.json();
@@ -42,10 +42,23 @@ export const editCategory = (id) => ({
   payload: { id }
 });
 
-export const editCategoryCommit = (id, newName) => ({
-  type: 'budget-io/categories/edit/COMMIT',
-  payload: { id, newName }
-});
+export const editCategoryCommit = (id, newName) => async (dispatch) => {
+  const response = await fetch(`http://192.168.255.1:5000/api/categories/${id}`, {
+    method: 'PATCH',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({ name: newName })
+  });
+
+  if (response.status >= 400)
+    throw new Error('Add category failure.');
+
+  dispatch({
+    type: 'budget-io/categories/edit/COMMIT',
+    payload: { id, newName }
+  });
+};
 
 export const deleteCategory = (id) => async (dispatch) => {
 
