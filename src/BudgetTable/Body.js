@@ -8,7 +8,7 @@ const createIfNotExists = (operations, categoryId, month) => (
     plan: 0,
     fact: 0
   }
-)
+);
 
 const Body = ({
   type,
