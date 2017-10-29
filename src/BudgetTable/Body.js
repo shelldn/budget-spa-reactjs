@@ -50,6 +50,10 @@ const Body = ({
             ? <AddCategory onSubmit={name => addCategoryCommit(type, name)} />
             : <a href="javascript:void(0)" onClick={() => addCategory(type)}>Add category</a>}
       </td>
+      {months.map(m => [
+        <td></td>,
+        <td></td>
+      ])}
     </tr>
   </tbody>
 
