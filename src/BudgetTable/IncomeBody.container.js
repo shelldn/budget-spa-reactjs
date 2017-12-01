@@ -6,6 +6,7 @@ import {
   editCategoryCommit,
   deleteCategory
 } from '../categories';
+import { addPlan } from '../operations';
 import { connect } from 'react-redux';
 
 const filter = (categories) => categories
@@ -24,7 +25,8 @@ const mapDispatchToProps = ({
   addCategoryCommit,
   editCategory,
   editCategoryCommit,
-  deleteCategory
+  deleteCategory,
+  addPlan
 });
 
 const IncomeBody = connect(

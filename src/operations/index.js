@@ -12,6 +12,14 @@ export const fetchOperations = (token, year) => async (dispatch) => {
   });
 }
 
+export const addPlan = (categoryId, month) => ({
+  type: 'budget-io/operations/plan/ADD',
+  payload: {
+    categoryId,
+    month
+  }
+});
+
 export const reducer = (state = [], action) => {
   switch (action.type) {
     case FETCH:

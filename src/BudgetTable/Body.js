@@ -3,13 +3,6 @@ import DisplayCategory from './DisplayCategory';
 import AddCategory from './AddCategory';
 import EditCategory from './EditCategory';
 
-const createIfNotExists = (operations, categoryId, month) => (
-  operations.find(o => o.categoryId === categoryId && o.month === month) || {
-    plan: 0,
-    fact: 0
-  }
-);
-
 const Body = ({
   type,
   months,
@@ -20,7 +13,8 @@ const Body = ({
   addCategoryCommit,
   editCategory,
   editCategoryCommit,
-  deleteCategory
+  deleteCategory,
+  addPlan
 }) => (
 
   <tbody>
@@ -38,10 +32,23 @@ const Body = ({
               ? <EditCategory {...c} onSubmit={editCategoryCommit} />
               : <DisplayCategory {...c} editCategory={editCategory} deleteCategory={deleteCategory} />}
         </td>
-        {months.map(m => createIfNotExists(operations, c.id, m)).map(o => [
-          <td>{o.plan}</td>,
-          <td>{o.fact}</td>
-        ])}
+
+        {months.map(m => {
+          const operation = operations.find(o => o.categoryId === c.id && o.month === m);
+
+          if (operation == null)
+            return [
+              <td onDoubleClick={() => addPlan(c.id, m)}>0</td>,
+              <td>0</td>
+            ];
+          else
+            return [
+              <td>
+                {operation.plan}
+              </td>,
+              <td>{operation.fact}</td>
+            ];
+        })}
       </tr>
     )}
     <tr>
