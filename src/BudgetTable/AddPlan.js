@@ -6,9 +6,14 @@ class AddPlan extends Component {
     this.input.select();
   }
 
+  handleSubmit(e) {
+    e.preventDefault();
+    this.props.onSubmit(this.input.value);
+  }
+
   render() {
     return (
-      <form onSubmit={() => console.log(this.input.value)}>
+      <form onSubmit={this.handleSubmit.bind(this)}>
         <input
           ref={i => this.input = i}
           autoFocus

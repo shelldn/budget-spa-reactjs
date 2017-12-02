@@ -18,6 +18,13 @@ export const addPlan = (categoryId, month) => ({
     categoryId,
     month
   }
+}); 
+
+export const addPlanCommit = (plan) => ({
+  type: 'budget-io/operations/plan/add/COMMIT',
+  payload: {
+    plan
+  }
 });
 
 const operation = (state, action) => {
@@ -26,8 +33,19 @@ const operation = (state, action) => {
       return {
         categoryId: action.payload.categoryId,
         month: action.payload.month,
-        plan: 0
+        plan: 0,
+        fact: 0
       };
+
+    case 'budget-io/operations/plan/add/COMMIT':
+      if (!state.id)
+        return {
+          ...state,
+          id: 1,
+          plan: action.payload.plan
+        };
+
+      break;
 
     default:
       return state;
@@ -41,9 +59,12 @@ export const reducer = (state = [], action) => {
 
     case 'budget-io/operations/plan/ADD':
       return [
-        ...state,
+        ...state.filter(o => o.id),
         operation(undefined, action)
       ];
+
+    case 'budget-io/operations/plan/add/COMMIT':
+      return state.map(o => operation(o, action));
 
     default:
       return state;      

@@ -2,7 +2,7 @@ import React from 'react';
 import DisplayCategory from './DisplayCategory';
 import AddCategory from './AddCategory';
 import EditCategory from './EditCategory';
-import AddPlan from './AddPlan';
+import AddPlan from './AddPlan.container';
 
 const Body = ({
   type,
@@ -35,13 +35,15 @@ const Body = ({
         </td>
 
         {months.map(m => {
-          const operation = operations.find(o => o.categoryId === c.id && o.month === m);
+          const operation = operations
+            .find(o => o.categoryId === c.id && o.month === m);
 
           if (operation == null)
             return [
               <td onDoubleClick={() => addPlan(c.id, m)}>0</td>,
               <td>0</td>
             ];
+
           else if (!operation.id)
             return [
               <td>
@@ -49,11 +51,14 @@ const Body = ({
                     ? <AddPlan value={operation.plan} />
                     : 0}
               </td>,
-              <td>{operation.fact}</td>
+              <td>
+                {operation.fact}
+              </td>
             ];
+
           else return [
-            <td></td>,
-            <td></td>
+            <td>{operation.plan}</td>,
+            <td>{operation.fact}</td>
           ];
         })}
       </tr>
