@@ -8,10 +8,10 @@ const DisplayCategory = ({
 }) => (
   <div>
     {name}
-    <a href="javascript:void(0)" onClick={() => editCategory(id)}>
+    <a onClick={() => editCategory(id)}>
       <i className="fa fa-pencil-square-o"></i>
     </a>
-    <a href="javascript:void(0)" onClick={() => deleteCategory(id)}>
+    <a onClick={() => deleteCategory(id)}>
       <i className="fa fa-trash-o"></i>
     </a>
   </div>

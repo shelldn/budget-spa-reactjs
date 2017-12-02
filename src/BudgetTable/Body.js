@@ -1,27 +1,8 @@
-import React, { Component } from 'react';
+import React from 'react';
 import DisplayCategory from './DisplayCategory';
 import AddCategory from './AddCategory';
 import EditCategory from './EditCategory';
-
-class AddPlan extends Component {
-
-  componentDidMount() {
-    this.input.select();
-  }
-
-  render() {
-    return (
-      <form>
-        <input
-          ref={i => this.input = i}
-          autoFocus
-          type="text"
-          defaultValue={this.props.value}
-        />
-      </form>
-    );
-  }
-}
+import AddPlan from './AddPlan';
 
 const Body = ({
   type,
@@ -70,6 +51,10 @@ const Body = ({
               </td>,
               <td>{operation.fact}</td>
             ];
+          else return [
+            <td></td>,
+            <td></td>
+          ];
         })}
       </tr>
     )}
@@ -77,7 +62,7 @@ const Body = ({
       <td>
         {category
             ? <AddCategory onSubmit={name => addCategoryCommit(type, name)} />
-            : <a href="javascript:void(0)" onClick={() => addCategory(type)}>Add category</a>}
+            : <a onClick={() => addCategory(type)}>Add category</a>}
       </td>
       {months.map(m => [
         <td></td>,
