@@ -1,7 +1,27 @@
-import React from 'react';
+import React, { Component } from 'react';
 import DisplayCategory from './DisplayCategory';
 import AddCategory from './AddCategory';
 import EditCategory from './EditCategory';
+
+class AddPlan extends Component {
+
+  componentDidMount() {
+    this.input.select();
+  }
+
+  render() {
+    return (
+      <form>
+        <input
+          ref={i => this.input = i}
+          autoFocus
+          type="text"
+          defaultValue={this.props.value}
+        />
+      </form>
+    );
+  }
+}
 
 const Body = ({
   type,
@@ -41,10 +61,12 @@ const Body = ({
               <td onDoubleClick={() => addPlan(c.id, m)}>0</td>,
               <td>0</td>
             ];
-          else
+          else if (!operation.id)
             return [
               <td>
-                {operation.plan}
+                {operation.plan === 0
+                    ? <AddPlan value={operation.plan} />
+                    : 0}
               </td>,
               <td>{operation.fact}</td>
             ];
