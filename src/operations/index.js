@@ -45,7 +45,7 @@ const operation = (state, action) => {
           plan: action.payload.plan
         };
 
-      break;
+      return state;
 
     default:
       return state;
