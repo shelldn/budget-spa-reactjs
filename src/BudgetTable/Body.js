@@ -3,6 +3,7 @@ import DisplayCategory from './DisplayCategory';
 import AddCategory from './AddCategory';
 import EditCategory from './EditCategory';
 import AddPlan from './AddPlan.container';
+import AddFact from './AddFact.container';
 
 const Body = ({
   type,
@@ -15,7 +16,8 @@ const Body = ({
   editCategory,
   editCategoryCommit,
   deleteCategory,
-  addPlan
+  addPlan,
+  addFact
 }) => (
 
   <tbody>
@@ -41,7 +43,7 @@ const Body = ({
           if (operation == null)
             return [
               <td onDoubleClick={() => addPlan(c.id, m)}>0</td>,
-              <td>0</td>
+              <td onDoubleClick={() => addFact(c.id, m)}>0</td>
             ];
 
           else if (!operation.id)
@@ -52,7 +54,9 @@ const Body = ({
                     : 0}
               </td>,
               <td>
-                {operation.fact}
+                {operation.fact === 0
+                    ? <AddFact value={operation.fact} />
+                    : 0}
               </td>
             ];
 

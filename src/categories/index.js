@@ -1,3 +1,5 @@
+import { host, port } from '../config';
+
 const FETCH = 'budget-io/categories/FETCH';
 
 const fetchCategoriesSuccess = (payload) => ({
@@ -6,7 +8,7 @@ const fetchCategoriesSuccess = (payload) => ({
 })
 
 export const fetchCategories = (token, year) => (dispatch) => {
-    fetch(`http://0.0.0.0:5000/api/budgets/${year}/categories`, {
+    fetch(`http://${host}:${port}/api/budgets/${year}/categories`, {
     headers: {
       'Authorization': `Bearer ${token}`
     }
@@ -19,7 +21,7 @@ export const addCategory = (type) => ({
 });
 
 export const addCategoryCommit = (type, name) => async (dispatch) => {
-  const response = await fetch('http://0.0.0.0:5000/api/budgets/2017/categories', {
+  const response = await fetch(`http://${host}:${port}/api/budgets/2017/categories`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
@@ -44,7 +46,7 @@ export const editCategory = (id) => ({
 });
 
 export const editCategoryCommit = (id, newName) => async (dispatch) => {
-  const response = await fetch(`http://0.0.0.0:5000/api/categories/${id}`, {
+  const response = await fetch(`http://${host}:${port}/api/categories/${id}`, {
     method: 'PATCH',
     headers: {
       'Content-Type': 'application/json'
@@ -63,7 +65,7 @@ export const editCategoryCommit = (id, newName) => async (dispatch) => {
 
 export const deleteCategory = (id) => async (dispatch) => {
 
-  const response = await fetch(`http://0.0.0.0:5000/api/categories/${id}`, {
+  const response = await fetch(`http://${host}:${port}/api/categories/${id}`, {
     method: 'DELETE'
   });
 

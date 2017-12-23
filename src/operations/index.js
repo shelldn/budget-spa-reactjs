@@ -27,6 +27,13 @@ export const addPlanCommit = (plan) => ({
   }
 });
 
+export const addFactCommit = (fact) => ({
+  type: 'budget-io/oprations/fact/add/COMMIT',
+  payload: {
+    fact
+  }
+});
+
 const operation = (state, action) => {
   switch (action.type) {
     case 'budget-io/operations/plan/ADD':
@@ -55,7 +62,7 @@ const operation = (state, action) => {
 export const reducer = (state = [], action) => {
   switch (action.type) {
     case FETCH:
-      return action.payload;    
+      return action.payload;
 
     case 'budget-io/operations/plan/ADD':
       return [
