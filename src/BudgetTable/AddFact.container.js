@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import AddPlan from './AddPlan';
+import AddOperation from './AddOperation';
 import { addFactCommit } from '../operations';
 
 const mapStateToProps = (state) => ({
@@ -13,6 +13,6 @@ const mapDispatchToProps = ({
 const AddPlanContainer = connect(
   mapStateToProps,
   mapDispatchToProps
-)(AddPlan);
+)(AddOperation);
 
 export default AddPlanContainer;

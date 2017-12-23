@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-class AddPlan extends Component {
+class AddOperation extends Component {
 
   componentDidMount() {
     this.input.select();
@@ -25,4 +25,4 @@ class AddPlan extends Component {
   }
 }
 
-export default AddPlan;
+export default AddOperation;
