@@ -47,12 +47,17 @@ const Body = ({
 
           if (operation instanceof InitOperation)
             return [
-              <td>
-                {operation.plan instanceof InitPlan ? <AddPlan value={operation.plan.value} /> : 0}
-              </td>,
-              <td>
-                {operation.fact instanceof InitFact ? <AddFact value={operation.fact.value} /> : 0}
-              </td>
+              (operation.plan instanceof InitPlan
+                ? <td>
+                    <AddPlan value={operation.plan.value} />
+                  </td>
+                : <td onDoubleClick={() => addPlan(c.id, m)}>0</td>),
+
+              (operation.fact instanceof InitFact
+                ? <td>
+                    <AddFact value={operation.fact.value} />
+                  </td>
+                : <td onDoubleClick={() => addFact(c.id, m)}>0</td>)
             ];
 
           else if (operation == null)
