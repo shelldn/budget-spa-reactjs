@@ -27,29 +27,76 @@ export const addPlanCommit = (plan) => ({
   }
 });
 
+export const addFact = (categoryId, month) => ({
+  type: 'budget-io/operations/fact/ADD',
+  payload: {
+    categoryId,
+    month
+  }
+});
+
 export const addFactCommit = (fact) => ({
-  type: 'budget-io/oprations/fact/add/COMMIT',
+  type: 'budget-io/operations/fact/add/COMMIT',
   payload: {
     fact
   }
 });
 
+export class InitOperation {
+  constructor(categoryId, month, plan, fact) {
+    this.categoryId = categoryId;
+    this.month = month;
+    this.plan = plan;
+    this.fact = fact;
+  }
+}
+
+export class InitPlan {
+  constructor() {
+    this.value = 0;
+  }
+}
+
+export class InitFact {
+  constructor() {
+    this.value = 0;
+  }
+}
+
 const operation = (state, action) => {
   switch (action.type) {
     case 'budget-io/operations/plan/ADD':
-      return {
-        categoryId: action.payload.categoryId,
-        month: action.payload.month,
-        plan: 0,
-        fact: 0
-      };
+      return new InitOperation(
+        action.payload.categoryId,
+        action.payload.month,
+        new InitPlan(),
+        0
+      );
 
     case 'budget-io/operations/plan/add/COMMIT':
-      if (!state.id)
+      if (state instanceof InitOperation)
         return {
           ...state,
           id: 1,
           plan: action.payload.plan
+        };
+
+      return state;
+
+    case 'budget-io/operations/fact/ADD':
+      return new InitOperation(
+        action.payload.categoryId,
+        action.payload.month,
+        0,
+        new InitFact()
+      );
+
+    case 'budget-io/operations/fact/add/COMMIT':
+      if (state instanceof InitOperation)
+        return {
+          ...state,
+          id: 1,
+          fact: action.payload.fact
         };
 
       return state;
@@ -66,11 +113,20 @@ export const reducer = (state = [], action) => {
 
     case 'budget-io/operations/plan/ADD':
       return [
-        ...state.filter(o => o.id),
+        ...state.filter(o => !(o instanceof InitOperation)),
         operation(undefined, action)
       ];
 
     case 'budget-io/operations/plan/add/COMMIT':
+      return state.map(o => operation(o, action));
+
+    case 'budget-io/operations/fact/ADD':
+      return [
+        ...state.filter(o => !(o instanceof InitOperation)),
+        operation(undefined, action)
+      ];
+
+    case 'budget-io/operations/fact/add/COMMIT':
       return state.map(o => operation(o, action));
 
     default:

@@ -4,6 +4,11 @@ import AddCategory from './AddCategory';
 import EditCategory from './EditCategory';
 import AddPlan from './AddPlan.container';
 import AddFact from './AddFact.container';
+import {
+  InitOperation,
+  InitPlan,
+  InitFact
+} from '../operations';
 
 const Body = ({
   type,
@@ -40,24 +45,20 @@ const Body = ({
           const operation = operations
             .find(o => o.categoryId === c.id && o.month === m);
 
-          if (operation == null)
+          if (operation instanceof InitOperation)
+            return [
+              <td>
+                {operation.plan instanceof InitPlan ? <AddPlan value={operation.plan.value} /> : 0}
+              </td>,
+              <td>
+                {operation.fact instanceof InitFact ? <AddFact value={operation.fact.value} /> : 0}
+              </td>
+            ];
+
+          else if (operation == null)
             return [
               <td onDoubleClick={() => addPlan(c.id, m)}>0</td>,
               <td onDoubleClick={() => addFact(c.id, m)}>0</td>
-            ];
-
-          else if (!operation.id)
-            return [
-              <td>
-                {operation.plan === 0
-                    ? <AddPlan value={operation.plan} />
-                    : 0}
-              </td>,
-              <td>
-                {operation.fact === 0
-                    ? <AddFact value={operation.fact} />
-                    : 0}
-              </td>
             ];
 
           else return [
