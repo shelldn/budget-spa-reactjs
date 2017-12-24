@@ -46,12 +46,23 @@ export const addFact = (categoryId, month) => ({
   }
 });
 
-export const addFactCommit = (fact) => ({
-  type: 'budget-io/operations/fact/add/COMMIT',
-  payload: {
-    fact
-  }
-});
+export const addFactCommit = (categoryId, month, fact) => async (dispatch) => {
+  const response = await fetch(`http://${host}:${port}/api/budgets/2017/operations`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({ categoryId, month, fact })
+  });
+
+  if (response.status >= 400)
+    throw new Error('Add operation failure');
+
+  dispatch({
+    type: 'budget-io/operations/fact/add/COMMIT',
+    payload: await response.json()
+  });
+};
 
 export class InitOperation {
   constructor(categoryId, month, plan, fact) {

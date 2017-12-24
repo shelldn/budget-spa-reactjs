@@ -57,7 +57,11 @@ const Body = ({
 
               (operation.fact instanceof InitFact
                 ? <td>
-                    <AddFact value={operation.fact.value} />
+                    <AddFact
+                      categoryId={c.id}                      
+                      month={m}
+                      value={operation.fact.value}
+                    />
                   </td>
                 : <td onDoubleClick={() => addFact(c.id, m)}>0</td>)
             ];

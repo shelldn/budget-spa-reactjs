@@ -8,7 +8,8 @@ class AddOperation extends Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    this.props.onSubmit(this.props.categoryId, this.props.month, this.input.value);
+    const { categoryId, month, onSubmit } = this.props;
+    onSubmit(categoryId, month, this.input.value);
   }
 
   render() {
