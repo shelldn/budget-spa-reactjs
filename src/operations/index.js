@@ -4,12 +4,11 @@ const FETCH = 'budget-io/operations/FETCH';
 
 export const fetchOperations = (token, year) => async (dispatch) => {
 
-  // const response = await fetch(`${host}${endpoints.operationsUrl.replace(':year', 2017)}`);
+  const response = await fetch(`http://${host}:${port}/api/budgets/2017/operations`);
 
   dispatch({
     type: FETCH,
-    payload: []
-    // payload: await response.json()
+    payload: await response.json()
   });
 }
 
