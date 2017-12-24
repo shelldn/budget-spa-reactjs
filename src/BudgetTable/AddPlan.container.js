@@ -1,9 +1,10 @@
 import { connect } from 'react-redux';
 import AddOperation from './AddOperation';
-import { addPlanCommit } from '../operations';
+import { addPlanCommit, InitOperation } from '../operations';
 
 const mapStateToProps = (state) => ({
-  categoryId: state.operations.find(o => !o.id).categoryId
+  categoryId: state.operations.find(o => o instanceof InitOperation).categoryId,
+  month: state.operations.find(o => o instanceof InitOperation).month
 });
 
 const mapDispatchToProps = ({

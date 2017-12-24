@@ -21,13 +21,13 @@ export const addPlan = (categoryId, month) => ({
   }
 }); 
 
-export const addPlanCommit = (plan) => async (dispatch) => {
+export const addPlanCommit = (categoryId, month, plan) => async (dispatch) => {
   const response = await fetch(`http://${host}:${port}/api/budgets/2017/operations`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
     },
-    body: JSON.stringify({ plan })
+    body: JSON.stringify({ categoryId, month, plan })
   });
 
   if (response.status >= 400)
