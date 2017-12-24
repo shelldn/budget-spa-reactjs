@@ -11,9 +11,7 @@ import {
 } from '../operations';
 
 const Body = ({
-  type,
-  months,
-  categories,
+  type, months, categories,
   category,
   operations,
   addCategory,
@@ -49,7 +47,11 @@ const Body = ({
             return [
               (operation.plan instanceof InitPlan
                 ? <td>
-                    <AddPlan value={operation.plan.value} />
+                    <AddPlan
+                      categoryId={c.id}
+                      month={m}
+                      value={operation.plan.value}
+                    />
                   </td>
                 : <td onDoubleClick={() => addPlan(c.id, m)}>0</td>),
 

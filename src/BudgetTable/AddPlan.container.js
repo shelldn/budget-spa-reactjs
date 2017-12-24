@@ -1,18 +1,13 @@
 import { connect } from 'react-redux';
 import AddOperation from './AddOperation';
-import { addPlanCommit, InitOperation } from '../operations';
-
-const mapStateToProps = (state) => ({
-  categoryId: state.operations.find(o => o instanceof InitOperation).categoryId,
-  month: state.operations.find(o => o instanceof InitOperation).month
-});
+import { addPlanCommit } from '../operations';
 
 const mapDispatchToProps = ({
   onSubmit: addPlanCommit
 });
 
 const AddPlanContainer = connect(
-  mapStateToProps,
+  undefined,
   mapDispatchToProps
 )(AddOperation);
 
