@@ -1,14 +1,15 @@
-import { host, endpoints } from '../configuration';
+import { host, port } from '../config';
 
 const FETCH = 'budget-io/operations/FETCH';
 
 export const fetchOperations = (token, year) => async (dispatch) => {
 
-  const response = await fetch(`${host}${endpoints.operationsUrl.replace(':year', 2017)}`);
+  // const response = await fetch(`${host}${endpoints.operationsUrl.replace(':year', 2017)}`);
 
   dispatch({
     type: FETCH,
-    payload: await response.json()
+    payload: []
+    // payload: await response.json()
   });
 }
 
@@ -20,12 +21,23 @@ export const addPlan = (categoryId, month) => ({
   }
 }); 
 
-export const addPlanCommit = (plan) => ({
-  type: 'budget-io/operations/plan/add/COMMIT',
-  payload: {
-    plan
-  }
-});
+export const addPlanCommit = (plan) => async (dispatch) => {
+  const response = await fetch(`http://${host}:${port}/api/budgets/2017/operations`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({ plan })
+  });
+
+  if (response.status >= 400)
+    throw new Error('Add operation failure.');
+
+  dispatch({
+    type: 'budget-io/operations/plan/add/COMMIT',
+    payload: await response.json()
+  });
+};
 
 export const addFact = (categoryId, month) => ({
   type: 'budget-io/operations/fact/ADD',
