@@ -64,6 +64,16 @@ export const addFactCommit = (categoryId, month, fact) => async (dispatch) => {
   });
 };
 
+export const editPlan = (operation) => ({
+  type: 'budget-io/operations/plan/EDIT',
+  payload: operation
+});
+
+export const editFact = (operation) => ({
+  type: 'budget-io/operations/fact/EDIT',
+  payload: operation
+});
+
 export class InitOperation {
   constructor(categoryId, month, plan, fact) {
     this.categoryId = categoryId;
@@ -80,6 +90,27 @@ export class InitPlan {
 }
 
 export class InitFact {
+  constructor() {
+    this.value = 0;
+  }
+}
+
+export class EditOperation {
+  constructor(categoryId, month, plan, fact) {
+    this.categoryId = categoryId;
+    this.month = month;
+    this.plan = plan;
+    this.fact = fact;
+  }
+}
+
+export class EditPlan {
+  constructor() {
+    this.value = 0;
+  }
+}
+
+export class EditFact {
   constructor() {
     this.value = 0;
   }
@@ -123,6 +154,22 @@ const operation = (state, action) => {
 
       return state;
 
+    case 'budget-io/operations/plan/EDIT':
+      return new EditOperation(
+        action.payload.categoryId,
+        action.payload.month,
+        new EditPlan(),
+        0
+      );
+
+    case 'budget-io/operations/fact/EDIT':
+      return new EditOperation(
+        action.payload.categoryId,
+        action.payload.month,
+        0,
+        new EditFact()
+      );
+
     default:
       return state;
   }
@@ -150,6 +197,18 @@ export const reducer = (state = [], action) => {
 
     case 'budget-io/operations/fact/add/COMMIT':
       return state.map(o => operation(o, action));
+
+    case 'budget-io/operations/plan/EDIT':
+      return [
+        ...state.filter(o => o.id !== action.payload.id),
+        operation(undefined, action)
+      ];
+
+    case 'budget-io/operations/fact/EDIT':
+      return [
+        ...state.filter(o => o.id !== action.payload.id),
+        operation(undefined, action)
+      ];
 
     default:
       return state;      

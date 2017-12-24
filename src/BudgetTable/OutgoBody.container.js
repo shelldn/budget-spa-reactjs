@@ -8,7 +8,9 @@ import {
 } from '../categories';
 import {
   addPlan,
-  addFact
+  addFact,
+  editPlan,
+  editFact
 } from '../operations';
 import { connect } from 'react-redux';
 
@@ -27,7 +29,9 @@ const mapDispatchToProps = ({
   editCategoryCommit,
   deleteCategory,
   addPlan,
-  addFact
+  addFact,
+  editPlan,
+  editFact
 });
 
 const OutgoBody = connect(

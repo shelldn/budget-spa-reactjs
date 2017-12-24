@@ -6,6 +6,7 @@ import AddPlan from './AddPlan.container';
 import AddFact from './AddFact.container';
 import {
   InitOperation,
+  EditOperation,
   InitPlan,
   InitFact
 } from '../operations';
@@ -22,7 +23,9 @@ const Body = ({
   editCategoryCommit,
   deleteCategory,
   addPlan,
-  addFact
+  addFact,
+  editPlan,
+  editFact
 }) => (
 
   <tbody>
@@ -45,7 +48,7 @@ const Body = ({
           const operation = operations
             .find(o => o.categoryId === c.id && o.month === m);
 
-          if (operation instanceof InitOperation)
+          if (operation instanceof InitOperation) {
             return [
               (operation.plan instanceof InitPlan
                 ? <td>
@@ -67,6 +70,13 @@ const Body = ({
                   </td>
                 : <td onDoubleClick={() => addFact(c.id, m)}>0</td>)
             ];
+          }
+
+          else if (operation instanceof EditOperation)
+            return [
+              <td>EP</td>,
+              <td>EF</td>
+            ];
 
           else if (operation == null)
             return [
@@ -75,8 +85,8 @@ const Body = ({
             ];
 
           else return [
-            <td>{operation.plan}</td>,
-            <td>{operation.fact}</td>
+            <td onDoubleClick={() => editPlan(operation)}>{operation.plan}</td>,
+            <td onDoubleClick={() => editFact(operation)}>{operation.fact}</td>
           ];
         })}
       </tr>
