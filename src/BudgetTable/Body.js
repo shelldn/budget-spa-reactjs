@@ -11,7 +11,9 @@ import {
 } from '../operations';
 
 const Body = ({
-  type, months, categories,
+  type,
+  months,
+  categories,
   category,
   operations,
   addCategory,
