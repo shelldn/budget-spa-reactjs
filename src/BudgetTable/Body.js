@@ -2,11 +2,12 @@ import React from 'react';
 import DisplayCategory from './DisplayCategory';
 import AddCategory from './AddCategory';
 import EditCategory from './EditCategory';
+import editOperation from './editOperation';
 import AddPlan from './AddPlan.container';
 import AddFact from './AddFact.container';
 import {
   InitOperation,
-  EditOperation,
+  EditOperationModel,
   InitPlan,
   InitFact
 } from '../operations';
@@ -42,67 +43,64 @@ const Body = ({
           {c.isEditing
               ? <EditCategory {...c} onSubmit={editCategoryCommit} />
               : <DisplayCategory {...c} editCategory={editCategory} deleteCategory={deleteCategory} />}
-        </td>
+            </td>
 
-        {months.map(m => {
-          const operation = operations
-            .find(o => o.categoryId === c.id && o.month === m);
+            {months.map(m => {
+              const operation = operations
+                .find(o => o.categoryId === c.id && o.month === m);
 
-          if (operation instanceof InitOperation) {
-            return [
-              (operation.plan instanceof InitPlan
-                ? <td>
-                    <AddPlan
-                      categoryId={c.id}
-                      month={m}
-                      value={operation.plan.value}
-                    />
-                  </td>
-                : <td onDoubleClick={() => addPlan(c.id, m)}>0</td>),
+              if (operation instanceof InitOperation) {
+                return [
+                  (operation.plan instanceof InitPlan
+                    ? <td>
+                      <AddPlan
+                        categoryId={c.id}
+                        month={m}
+                        value={operation.plan.value}
+                      />
+                    </td>
+                    : <td onDoubleClick={() => addPlan(c.id, m)}>0</td>),
 
-              (operation.fact instanceof InitFact
-                ? <td>
-                    <AddFact
-                      categoryId={c.id}                      
-                      month={m}
-                      value={operation.fact.value}
-                    />
-                  </td>
-                : <td onDoubleClick={() => addFact(c.id, m)}>0</td>)
-            ];
-          }
+                  (operation.fact instanceof InitFact
+                    ? <td>
+                      <AddFact
+                        categoryId={c.id}                      
+                        month={m}
+                        value={operation.fact.value}
+                      />
+                    </td>
+                    : <td onDoubleClick={() => addFact(c.id, m)}>0</td>)
+                ];
+              }
 
-          else if (operation instanceof EditOperation)
-            return [
-              <td>EP</td>,
-              <td>EF</td>
-            ];
+              else if (operation instanceof EditOperationModel)
+                return editOperation(operation);
 
-          else if (operation == null)
-            return [
-              <td onDoubleClick={() => addPlan(c.id, m)}>0</td>,
-              <td onDoubleClick={() => addFact(c.id, m)}>0</td>
-            ];
+              else if (operation == null)
+                return [
+                  <td onDoubleClick={() => addPlan(c.id, m)}>0</td>,
+                  <td onDoubleClick={() => addFact(c.id, m)}>0</td>
+                ];
 
-          else return [
-            <td onDoubleClick={() => editPlan(operation)}>{operation.plan}</td>,
-            <td onDoubleClick={() => editFact(operation)}>{operation.fact}</td>
-          ];
-        })}
-      </tr>
+              else return [
+                <td onDoubleClick={() => editPlan(operation)}>{operation.plan}</td>,
+                <td onDoubleClick={() => editFact(operation)}>{operation.fact}</td>
+              ];
+            })}
+          </tr>
     )}
     <tr>
       <td>
         {category
             ? <AddCategory onSubmit={name => addCategoryCommit(type, name)} />
             : <a onClick={() => addCategory(type)}>Add category</a>}
-      </td>
-      {months.map(m => [
-        <td></td>,
-        <td></td>
-      ])}
-    </tr>
-  </tbody>
+          </td>
+          {months.map(m => [
+            <td></td>,
+            <td></td>
+          ])}
+        </tr>
+      </tbody>
 
 );
 

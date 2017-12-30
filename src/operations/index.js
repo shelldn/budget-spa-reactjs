@@ -95,7 +95,7 @@ export class InitFact {
   }
 }
 
-export class EditOperation {
+export class EditOperationModel {
   constructor(categoryId, month, plan, fact) {
     this.categoryId = categoryId;
     this.month = month;
@@ -104,15 +104,15 @@ export class EditOperation {
   }
 }
 
-export class EditPlan {
-  constructor() {
-    this.value = 0;
+export class EditPlanModel {
+  constructor(value) {
+    this.value = value;
   }
 }
 
-export class EditFact {
-  constructor() {
-    this.value = 0;
+export class EditFactModel {
+  constructor(value) {
+    this.value = value;
   }
 }
 
@@ -155,19 +155,26 @@ const operation = (state, action) => {
       return state;
 
     case 'budget-io/operations/plan/EDIT':
-      return new EditOperation(
-        action.payload.categoryId,
-        action.payload.month,
-        new EditPlan(),
-        0
+      const {
+        categoryId,
+        month,
+        plan,
+        fact
+      } = action.payload;
+
+      return new EditOperationModel(
+        categoryId,
+        month,
+        new EditPlanModel(plan),
+        fact
       );
 
     case 'budget-io/operations/fact/EDIT':
-      return new EditOperation(
+      return new EditOperationModel(
         action.payload.categoryId,
         action.payload.month,
-        0,
-        new EditFact()
+        action.payload.plan,
+        new EditFactModel(action.payload.fact)
       );
 
     default:
