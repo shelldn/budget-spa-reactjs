@@ -2,7 +2,7 @@ import React from 'react';
 import DisplayCategory from './DisplayCategory';
 import AddCategory from './AddCategory';
 import EditCategory from './EditCategory';
-import editOperation from './editOperation';
+import edit from '../operations/edit';
 import AddPlan from './AddPlan.container';
 import AddFact from './AddFact.container';
 import {
@@ -74,7 +74,7 @@ const Body = ({
               }
 
               else if (operation instanceof EditOperationModel)
-                return editOperation(operation);
+                return edit(operation);
 
               else if (operation == null)
                 return [
