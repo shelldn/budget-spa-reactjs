@@ -74,7 +74,7 @@ const Body = ({
               }
 
               else if (operation instanceof EditOperationModel)
-                return edit(operation);
+                return edit(operation, editPlan, editFact);
 
               else if (operation == null)
                 return [
