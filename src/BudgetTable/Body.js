@@ -13,6 +13,7 @@ import {
 } from '../operations';
 
 const Body = ({
+  budgetId,
   type,
   months,
   categories,
@@ -101,7 +102,7 @@ const Body = ({
     <tr>
       <td>
         {category
-            ? <AddCategory onSubmit={name => addCategoryCommit(type, name)} />
+            ? <AddCategory onSubmit={name => addCategoryCommit(budgetId, type, name)} />
             : <a onClick={() => addCategory(type)}>Add category</a>}
           </td>
           {months.map(m => [

@@ -19,8 +19,8 @@ export const addCategory = (type) => ({
   payload: { type }
 });
 
-export const addCategoryCommit = (type, name) => async (dispatch) => {
-  const response = await fetch(`http://${host}:${port}/api/budgets/2017/categories`, {
+export const addCategoryCommit = (budgetId, type, name) => async (dispatch) => {
+  const response = await fetch(`http://${host}:${port}/api/budgets/${budgetId}/categories`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'

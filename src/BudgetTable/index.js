@@ -8,17 +8,22 @@ import { connect } from 'react-redux';
 import './index.css';
 
 class BudgetTable extends Component {
+
   componentDidMount() {
-    this.props.fetchCategories(this.props.match.params.id);    
-    this.props.fetchOperations(this.props.match.params.id);    
+    const { id } = this.props.match.params;
+
+    this.props.fetchCategories(id);    
+    this.props.fetchOperations(id);    
   }
 
   render() {
+    const { id } = this.props.match.params;
+
     return (
       <table className="budget-table">
         <Head />
-        <IncomeBody />
-        <OutgoBody />
+        <IncomeBody budgetId={id} />
+        <OutgoBody budgetId={id} />
       </table>
     );
   }
