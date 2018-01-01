@@ -2,17 +2,18 @@ import { host, port } from '../config';
 
 const FETCH = 'budget-io/categories/FETCH';
 
-const fetchCategoriesSuccess = (payload) => ({
-  type: FETCH,
-  payload
-})
+export const fetchCategories = (year) => async (dispatch) => {
+  const response = await fetch(`http://${host}:${port}/api/budgets/${year}/categories`);
 
-export const fetchCategories = (token, year) => (dispatch) => {
-    fetch(`http://${host}:${port}/api/budgets/${year}/categories`, {
-    headers: {
-      'Authorization': `Bearer ${token}`
-    }
-  }).then(r => r.json().then(categories => { dispatch(fetchCategoriesSuccess(categories)); }));
+  if (response.status >= 400)
+    throw new Error('Failed to fetch categories');
+
+  const categories = await response.json();
+
+  dispatch({
+    type: FETCH,
+    payload: categories
+  });
 }
 
 export const addCategory = (type) => ({
