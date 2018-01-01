@@ -74,6 +74,26 @@ export const editFact = (operation) => ({
   payload: operation
 });
 
+export const editPlanCommit = (id, plan) => async (dispatch) => {
+  const response = await fetch(`http://${host}:${port}/api/operations/${id}`, {
+    method: 'PATCH',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({ plan })
+  });
+
+  if (response.status >= 400)
+    throw new Error('Edit operations failure.');
+
+  dispatch({
+    type: 'budget-io/operations/plan/edit/COMMIT',
+    payload: {
+      plan
+    }
+  });
+};
+
 export class InitOperation {
   constructor(categoryId, month, plan, fact) {
     this.categoryId = categoryId;
@@ -96,7 +116,8 @@ export class InitFact {
 }
 
 export class EditOperationModel {
-  constructor(categoryId, month, plan, fact) {
+  constructor(id, categoryId, month, plan, fact) {
+    this.id = id;
     this.categoryId = categoryId;
     this.month = month;
     this.plan = plan;
@@ -156,6 +177,7 @@ const operation = (state, action) => {
 
     case 'budget-io/operations/plan/EDIT':
       const {
+        id,
         categoryId,
         month,
         plan,
@@ -163,6 +185,7 @@ const operation = (state, action) => {
       } = action.payload;
 
       return new EditOperationModel(
+        id,
         categoryId,
         month,
         new EditPlanModel(plan),
@@ -176,6 +199,15 @@ const operation = (state, action) => {
         action.payload.plan,
         new EditFactModel(action.payload.fact)
       );
+
+    case 'budget-io/operations/plan/edit/COMMIT':
+      if (state instanceof EditOperationModel)
+        return {
+          ...state,
+          plan: action.payload.plan
+        };
+
+      return state;
 
     default:
       return state;
@@ -216,6 +248,9 @@ export const reducer = (state = [], action) => {
         ...state.filter(o => o.id !== action.payload.id),
         operation(undefined, action)
       ];
+
+    case 'budget-io/operations/plan/edit/COMMIT':
+      return state.map(o => operation(o, action));
 
     default:
       return state;      

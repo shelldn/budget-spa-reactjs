@@ -21,7 +21,7 @@ const store = createStore(rootReducer, initialState, applyMiddleware(thunk, logg
 
 export const token = process.env.REACT_APP_TOKEN;
 
-const year = (new Date()).getFullYear();
+const year = 2017;
 
 store.dispatch(fetchCategories(token, year));
 store.dispatch(fetchOperations(token, year));

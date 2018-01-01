@@ -6,9 +6,9 @@ import { EditFactModel } from './index.js';
 import EditFact from './EditFact';
 import DisplayFact from './DisplayFact';
 
-const edit = (o, editPlan, editFact) => [
+const edit = (o, editPlan, editFact, editPlanCommit) => [
   o.plan instanceof EditPlanModel
-    ? <EditPlan {...o} />
+    ? <EditPlan value={o.plan.value} onCommit={value => editPlanCommit(o.id, value)} />
     : <DisplayPlan value={o.plan} onEdit={() => editPlan(o)} />,
 
   o.fact instanceof EditFactModel

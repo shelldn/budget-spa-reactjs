@@ -26,7 +26,8 @@ const Body = ({
   addPlan,
   addFact,
   editPlan,
-  editFact
+  editFact,
+  editPlanCommit
 }) => (
 
   <tbody>
@@ -74,7 +75,12 @@ const Body = ({
               }
 
               else if (operation instanceof EditOperationModel)
-                return edit(operation, editPlan, editFact);
+                return edit(
+                  operation,
+                  editPlan,
+                  editFact,
+                  editPlanCommit
+                );
 
               else if (operation == null)
                 return [
