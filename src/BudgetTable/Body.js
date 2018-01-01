@@ -57,6 +57,7 @@ const Body = ({
                   (operation.plan instanceof InitPlan
                     ? <td>
                       <AddPlan
+                        id={budgetId}
                         categoryId={c.id}
                         month={m}
                         value={operation.plan.value}
@@ -67,6 +68,7 @@ const Body = ({
                   (operation.fact instanceof InitFact
                     ? <td>
                       <AddFact
+                        id={budgetId}
                         categoryId={c.id}                      
                         month={m}
                         value={operation.fact.value}

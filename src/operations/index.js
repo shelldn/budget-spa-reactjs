@@ -22,8 +22,8 @@ export const addPlan = (categoryId, month) => ({
   }
 }); 
 
-export const addPlanCommit = (categoryId, month, plan) => async (dispatch) => {
-  const response = await fetch(`http://${host}:${port}/api/budgets/2017/operations`, {
+export const addPlanCommit = (budgetId, categoryId, month, plan) => async (dispatch) => {
+  const response = await fetch(`http://${host}:${port}/api/budgets/${budgetId}/operations`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
@@ -48,8 +48,8 @@ export const addFact = (categoryId, month) => ({
   }
 });
 
-export const addFactCommit = (categoryId, month, fact) => async (dispatch) => {
-  const response = await fetch(`http://${host}:${port}/api/budgets/2017/operations`, {
+export const addFactCommit = (budgetId, categoryId, month, fact) => async (dispatch) => {
+  const response = await fetch(`http://${host}:${port}/api/budgets/${budgetId}/operations`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
