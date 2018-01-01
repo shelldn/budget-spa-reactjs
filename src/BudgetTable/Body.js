@@ -27,7 +27,8 @@ const Body = ({
   addFact,
   editPlan,
   editFact,
-  editPlanCommit
+  editPlanCommit,
+  editFactCommit
 }) => (
 
   <tbody>
@@ -79,8 +80,10 @@ const Body = ({
                   operation,
                   editPlan,
                   editFact,
-                  editPlanCommit
+                  editPlanCommit,
+                  editFactCommit
                 );
+
 
               else if (operation == null)
                 return [

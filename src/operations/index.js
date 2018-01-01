@@ -74,13 +74,13 @@ export const editFact = (operation) => ({
   payload: operation
 });
 
-export const editPlanCommit = (id, plan) => async (dispatch) => {
+export const editPlanCommit = (id, plan, fact) => async (dispatch) => {
   const response = await fetch(`http://${host}:${port}/api/operations/${id}`, {
     method: 'PATCH',
     headers: {
       'Content-Type': 'application/json'
     },
-    body: JSON.stringify({ plan })
+    body: JSON.stringify({ plan, fact })
   });
 
   if (response.status >= 400)
@@ -90,6 +90,26 @@ export const editPlanCommit = (id, plan) => async (dispatch) => {
     type: 'budget-io/operations/plan/edit/COMMIT',
     payload: {
       plan
+    }
+  });
+};
+
+export const editFactCommit = (id, plan, fact) => async (dispatch) => {
+  const response = await fetch(`http://${host}:${port}/api/operations/${id}`, {
+    method: 'PATCH',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({ plan, fact })
+  });
+
+  if (response.status >= 400)
+    throw new Error('Edit operations failure.');
+
+  dispatch({
+    type: 'budget-io/operations/fact/edit/COMMIT',
+    payload: {
+      fact
     }
   });
 };
@@ -194,6 +214,7 @@ const operation = (state, action) => {
 
     case 'budget-io/operations/fact/EDIT':
       return new EditOperationModel(
+        action.payload.id,
         action.payload.categoryId,
         action.payload.month,
         action.payload.plan,
@@ -205,6 +226,15 @@ const operation = (state, action) => {
         return {
           ...state,
           plan: action.payload.plan
+        };
+
+      return state;
+
+    case 'budget-io/operations/fact/edit/COMMIT':
+      if (state instanceof EditOperationModel)
+        return {
+          ...state,
+          fact: action.payload.fact
         };
 
       return state;
@@ -250,6 +280,9 @@ export const reducer = (state = [], action) => {
       ];
 
     case 'budget-io/operations/plan/edit/COMMIT':
+      return state.map(o => operation(o, action));
+
+    case 'budget-io/operations/fact/edit/COMMIT':
       return state.map(o => operation(o, action));
 
     default:

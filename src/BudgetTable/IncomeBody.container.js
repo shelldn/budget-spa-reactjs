@@ -11,7 +11,8 @@ import {
   addFact,
   editPlan,
   editFact,
-  editPlanCommit
+  editPlanCommit,
+  editFactCommit
 } from '../operations';
 import { connect } from 'react-redux';
 
@@ -36,7 +37,8 @@ const mapDispatchToProps = ({
   addFact,
   editPlan,
   editFact,
-  editPlanCommit
+  editPlanCommit,
+  editFactCommit
 });
 
 const IncomeBody = connect(
