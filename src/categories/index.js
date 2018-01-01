@@ -8,11 +8,9 @@ export const fetchCategories = (year) => async (dispatch) => {
   if (response.status >= 400)
     throw new Error('Failed to fetch categories');
 
-  const categories = await response.json();
-
   dispatch({
     type: FETCH,
-    payload: categories
+    payload: await response.json()
   });
 }
 

@@ -24,7 +24,7 @@ export const token = process.env.REACT_APP_TOKEN;
 const year = 2017;
 
 store.dispatch(fetchCategories(year));
-store.dispatch(fetchOperations(token, year));
+store.dispatch(fetchOperations(year));
 
 ReactDOM.render(
   <Provider store={store}>
