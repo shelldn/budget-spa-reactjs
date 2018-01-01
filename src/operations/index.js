@@ -151,7 +151,7 @@ const operation = (state, action) => {
       if (state instanceof InitOperation)
         return {
           ...state,
-          id: 1,
+          id: action.payload.id,
           plan: action.payload.plan
         };
 
@@ -169,7 +169,7 @@ const operation = (state, action) => {
       if (state instanceof InitOperation)
         return {
           ...state,
-          id: 1,
+          id: action.payload.id,
           fact: action.payload.fact
         };
 
