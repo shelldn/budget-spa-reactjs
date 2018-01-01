@@ -3,7 +3,7 @@ import { host, port } from '../config';
 const FETCH = 'budget-io/operations/FETCH';
 
 export const fetchOperations = (year) => async (dispatch) => {
-  const response = await fetch(`http://${host}:${port}/api/budgets/2017/operations`);
+  const response = await fetch(`http://${host}:${port}/api/budgets/${year}/operations`);
 
   if (response.status >= 400)
     throw new Error('Failed to fetch operations');
