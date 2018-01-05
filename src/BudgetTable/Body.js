@@ -35,9 +35,9 @@ const Body = ({
   <tbody>
     <tr>
       <td></td>
-      {months.map(() => [
-        <td>0</td>,
-        <td>0</td>
+      {months.map(m => [
+        <td>{operations.filter(o => o.month === m && categories.some(c => c.id === o.categoryId)).map(o => o.plan).reduce((a, b) => a + b, 0)}</td>,
+        <td>{operations.filter(o => o.month === m && categories.some(c => c.id === o.categoryId)).map(o => o.fact).reduce((a, b) => a + b, 0)}</td>,
       ])}
     </tr>
     {categories.map(c => 
