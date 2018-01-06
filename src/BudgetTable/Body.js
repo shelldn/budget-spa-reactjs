@@ -126,8 +126,8 @@ const Body = ({
 
               else if (operation == null)
                 return [
-                  <td onDoubleClick={() => addPlan(c.id, m)}>0</td>,
-                  <td onDoubleClick={() => addFact(c.id, m)}>0</td>
+                  <td className="operation-plan" onDoubleClick={() => addPlan(c.id, m)}>0</td>,
+                  <td className="operation-fact" onDoubleClick={() => addFact(c.id, m)}>0</td>
                 ];
 
               else return [
