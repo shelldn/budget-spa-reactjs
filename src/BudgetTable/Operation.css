@@ -7,3 +7,8 @@
 .operation-fact.operation-fact--empty {
   color: #ccc;
 }
+
+.operation-plan.operation-plan--over,
+.operation-fact.operation-fact--over {
+  background-color: #fee;
+}

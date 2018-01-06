@@ -133,8 +133,8 @@ const Body = ({
                 ];
 
               else return [
-                <td className={`operation-plan${operation.plan === 0 ? ' operation-plan--empty' : ''}`} onDoubleClick={() => editPlan(operation)}>{formatMoney(operation.plan)}</td>,
-                <td className={`operation-fact${operation.fact === 0 ? ' operation-fact--empty' : ''}`} onDoubleClick={() => editFact(operation)}>{formatMoney(operation.fact)}</td>
+                <td className={`operation-plan${operation.plan === 0 ? ' operation-plan--empty' : ''}${operation.plan < operation.fact ? ' operation-plan--over' : ''}`} onDoubleClick={() => editPlan(operation)}>{formatMoney(operation.plan)}</td>,
+                <td className={`operation-fact${operation.fact === 0 ? ' operation-fact--empty' : ''}${operation.plan < operation.fact ? ' operation-fact--over' : ''}`} onDoubleClick={() => editFact(operation)}>{formatMoney(operation.fact)}</td>
               ];
             })}
           </tr>
