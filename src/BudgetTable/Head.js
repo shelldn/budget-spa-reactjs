@@ -1,9 +1,10 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import './Head.css';
 
 let Head = ({ months }) => (
 
-  <tbody>
+  <tbody className="head">
     <tr>
       <td></td>
       {months.map(m => 
