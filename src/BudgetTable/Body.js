@@ -128,13 +128,13 @@ const Body = ({
 
               else if (operation == null)
                 return [
-                  <td className="operation-plan" onDoubleClick={() => addPlan(c.id, m)}>{formatMoney(0)}</td>,
-                  <td className="operation-fact" onDoubleClick={() => addFact(c.id, m)}>{formatMoney(0)}</td>
+                  <td className="operation-plan operation-plan--empty" onDoubleClick={() => addPlan(c.id, m)}>{formatMoney(0)}</td>,
+                  <td className="operation-fact operation-fact--empty" onDoubleClick={() => addFact(c.id, m)}>{formatMoney(0)}</td>
                 ];
 
               else return [
-                <td className="operation-plan" onDoubleClick={() => editPlan(operation)}>{formatMoney(operation.plan)}</td>,
-                <td className="operation-fact" onDoubleClick={() => editFact(operation)}>{formatMoney(operation.fact)}</td>
+                <td className={`operation-plan${operation.plan === 0 ? ' operation-plan--empty' : ''}`} onDoubleClick={() => editPlan(operation)}>{formatMoney(operation.plan)}</td>,
+                <td className={`operation-fact${operation.fact === 0 ? ' operation-fact--empty' : ''}`} onDoubleClick={() => editFact(operation)}>{formatMoney(operation.fact)}</td>
               ];
             })}
           </tr>

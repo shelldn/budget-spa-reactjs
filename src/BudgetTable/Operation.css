@@ -2,3 +2,8 @@
 .operation-fact {
   text-align: right;
 }
+
+.operation-plan.operation-plan--empty,
+.operation-fact.operation-fact--empty {
+  color: #ccc;
+}
