@@ -4,6 +4,7 @@ import BudgetTable from './BudgetTable';
 import { fetchCategories } from './categories';
 import { fetchOperations } from './operations';
 import { connect } from 'react-redux';
+import './Budget.css';
 
 class App extends Component {
 
@@ -24,10 +25,10 @@ class App extends Component {
 
     return (
       <div>
-        <header>
-          <Link to={`/budgets/${id - 1}`}>&lt;</Link>
-          {id}
-          <Link to={`/budgets/${id + 1}`}>&gt;</Link>
+        <header className="budget">
+          <Link className="budget__previous-link" to={`/budgets/${id - 1}`}>&lt;</Link>
+          <h1 className="budget__id">{id}</h1>
+          <Link className="budget__next-link" to={`/budgets/${id + 1}`}>&gt;</Link>
         </header>
         <BudgetTable id={id} />
       </div>
