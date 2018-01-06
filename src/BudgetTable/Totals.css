@@ -1,7 +1,11 @@
-.totals--income {
+.totals {
+  text-align: right;
+}
+
+.totals.totals--income {
   color: green;
 }
 
-.totals--outgo {
+.totals.totals--outgo {
   color: #B02624;
 }

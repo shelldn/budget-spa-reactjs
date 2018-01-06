@@ -12,6 +12,7 @@ import {
   InitPlan,
   InitFact
 } from '../operations';
+import './Operation.css';
 import './Totals.css';
 
 const sum = (s) => (operations, month) => {
@@ -68,7 +69,7 @@ const Body = ({
 }) => (
 
   <tbody>
-    <tr className={`totals--${type}`}>
+    <tr className={`totals totals--${type}`}>
       <td></td>
       {months.map(m => [
         <td>{totals[m].plan}</td>,
@@ -130,8 +131,8 @@ const Body = ({
                 ];
 
               else return [
-                <td onDoubleClick={() => editPlan(operation)}>{operation.plan}</td>,
-                <td onDoubleClick={() => editFact(operation)}>{operation.fact}</td>
+                <td className="operation-plan" onDoubleClick={() => editPlan(operation)}>{operation.plan}</td>,
+                <td className="operation-fact" onDoubleClick={() => editFact(operation)}>{operation.fact}</td>
               ];
             })}
           </tr>
