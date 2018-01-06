@@ -8,7 +8,8 @@ class EditFact extends Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    this.props.onCommit(this.input.value);
+    const amount = parseFloat(this.input.value);
+    this.props.onCommit(amount);
   }
 
   render() {
