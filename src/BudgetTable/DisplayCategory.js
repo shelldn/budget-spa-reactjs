@@ -1,4 +1,5 @@
 import React from 'react';
+import './Category.css';
 
 const DisplayCategory = ({
   id,
@@ -6,14 +7,16 @@ const DisplayCategory = ({
   editCategory,
   deleteCategory
 }) => (
-  <div>
+  <div className="category">
     {name}
-    <a onClick={() => editCategory(id)}>
-      <i className="fa fa-pencil-square-o"></i>
-    </a>
-    <a onClick={() => deleteCategory(id)}>
-      <i className="fa fa-trash-o"></i>
-    </a>
+    <div className="category__edit-buttons">
+      <a onClick={() => editCategory(id)}>
+        <i className="fa fa-pencil-square-o"></i>
+      </a>
+      <a onClick={() => deleteCategory(id)}>
+        <i className="fa fa-trash-o"></i>
+      </a>
+    </div>
   </div>
 );
 
