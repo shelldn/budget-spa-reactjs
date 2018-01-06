@@ -5,8 +5,8 @@ import logger from 'redux-logger';
 import thunk from 'redux-thunk';
 import { Provider } from 'react-redux';
 import rootReducer from './reducer';
-import { HashRouter as Router, Route, Link } from 'react-router-dom';
-import BudgetTable from './BudgetTable';
+import { HashRouter as Router, Route } from 'react-router-dom';
+import App from './App';
 import registerServiceWorker from './registerServiceWorker';
 import 'font-awesome/css/font-awesome.css';
 import './index.css';
@@ -20,21 +20,6 @@ const store = createStore(
   initialState,
   applyMiddleware(thunk, logger)
 );
-
-const App = ({ match }) => {
-  const id = parseInt(match.params.id, 10);
-
-  return (
-    <div>
-      <header>
-        <Link to={`/budgets/${id - 1}`}>&lt;</Link>
-        {match.params.id}
-        <Link to={`/budgets/${id + 1}`}>&gt;</Link>
-      </header>
-      <BudgetTable id={id} />
-    </div>
-  )
-};
 
 ReactDOM.render(
   <Provider store={store}>
