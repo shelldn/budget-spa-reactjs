@@ -26,9 +26,9 @@ class App extends Component {
     return (
       <div>
         <header className="budget">
-          <Link className="budget__previous-link" to={`/budgets/${id - 1}`}>&lt;</Link>
+          <Link className="budget__previous" to={`/budgets/${id - 1}`}>&lt;</Link>
           <h1 className="budget__id">{id}</h1>
-          <Link className="budget__next-link" to={`/budgets/${id + 1}`}>&gt;</Link>
+          <Link className="budget__next" to={`/budgets/${id + 1}`}>&gt;</Link>
         </header>
         <BudgetTable id={id} />
       </div>

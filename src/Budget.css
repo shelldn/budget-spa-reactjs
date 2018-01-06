@@ -2,19 +2,24 @@
   font-size: 2em;
 }
 
-.budget__previous-link,
-.budget__next-link {
+.budget__previous,
+.budget__next {
   text-decoration: none;
-  color: #444;
+  color: #ccc;
 }
 
 .budget__id {
   margin: 0 .5em;
 }
 
-.budget__previous-link,
-.budget__next-link,
+.budget__previous,
+.budget__next,
 .budget__id {
   display: inline;
   vertical-align: middle;
+}
+
+.budget__previous:hover,
+.budget__next:hover {
+  color: #444;
 }
