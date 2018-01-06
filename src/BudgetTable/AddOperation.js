@@ -9,7 +9,8 @@ class AddOperation extends Component {
   handleSubmit(e) {
     e.preventDefault();
     const { id, categoryId, month, onSubmit } = this.props;
-    onSubmit(id, categoryId, month, this.input.value);
+    const amount = parseFloat(this.input.value);
+    onSubmit(id, categoryId, month, amount);
   }
 
   render() {
