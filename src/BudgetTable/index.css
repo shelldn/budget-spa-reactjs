@@ -4,21 +4,6 @@
 
 .budget-table th,
 .budget-table td {
-  border: 1px solid lightgrey;
-}
-
-.budget-table__cell.budget-table__cell--income {
-  // background: #BEB;
-}
-
-.budget-table__cell.budget-table__cell--outgo {
-  // background: #EBB;
-}
-
-.budget-table__income-total {
-  background: #BEB;
-}
-
-.budget-table__outgo-total {
-  background: #EBB;
+  padding: .4em .7em;
+  border: 1px solid #eee;
 }

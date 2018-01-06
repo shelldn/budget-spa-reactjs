@@ -8,11 +8,12 @@ import AddFact from './AddFact.container';
 import {
   InitOperation,
   EditOperationModel,
-  EditPlanModel,
-  EditFactModel,
+  EditPlanModel, EditFactModel,
   InitPlan,
   InitFact
 } from '../operations';
+import './Operation.css';
+import './Totals.css';
 
 const sum = (s) => (operations, month) => {
 
@@ -46,6 +47,8 @@ export const getTotals = (operations, months) => {
   return totals;
 };
 
+const formatMoney = (amount) => amount.toLocaleString('en-US', { style: 'decimal', minimumFractionDigits: 2, maximumFractionDigits: 2 });
+
 const Body = ({
   budgetId,
   type,
@@ -68,11 +71,11 @@ const Body = ({
 }) => (
 
   <tbody>
-    <tr>
+    <tr className={`totals totals--${type}`}>
       <td></td>
       {months.map(m => [
-        <td>{totals[m].plan}</td>,
-        <td>{totals[m].fact}</td>,
+        <td>{formatMoney(totals[m].plan)}</td>,
+        <td>{formatMoney(totals[m].fact)}</td>,
       ])}
     </tr>
     {categories.map(c => 
@@ -125,13 +128,13 @@ const Body = ({
 
               else if (operation == null)
                 return [
-                  <td onDoubleClick={() => addPlan(c.id, m)}>0</td>,
-                  <td onDoubleClick={() => addFact(c.id, m)}>0</td>
+                  <td className="operation-plan operation-plan--empty" onDoubleClick={() => addPlan(c.id, m)}>{formatMoney(0)}</td>,
+                  <td className="operation-fact operation-fact--empty" onDoubleClick={() => addFact(c.id, m)}>{formatMoney(0)}</td>
                 ];
 
               else return [
-                <td onDoubleClick={() => editPlan(operation)}>{operation.plan}</td>,
-                <td onDoubleClick={() => editFact(operation)}>{operation.fact}</td>
+                <td className={`operation-plan${operation.plan === 0 ? ' operation-plan--empty' : ''}${operation.plan < operation.fact ? ' operation-plan--over' : ''}`} onDoubleClick={() => editPlan(operation)}>{formatMoney(operation.plan)}</td>,
+                <td className={`operation-fact${operation.fact === 0 ? ' operation-fact--empty' : ''}${operation.plan < operation.fact ? ' operation-fact--over' : ''}`} onDoubleClick={() => editFact(operation)}>{formatMoney(operation.fact)}</td>
               ];
             })}
           </tr>

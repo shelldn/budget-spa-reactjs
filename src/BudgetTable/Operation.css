@@ -1,0 +1,14 @@
+.operation-plan,
+.operation-fact {
+  text-align: right;
+}
+
+.operation-plan.operation-plan--empty,
+.operation-fact.operation-fact--empty {
+  color: #ccc;
+}
+
+.operation-plan.operation-plan--over,
+.operation-fact.operation-fact--over {
+  background-color: #fdf7f7;
+}
