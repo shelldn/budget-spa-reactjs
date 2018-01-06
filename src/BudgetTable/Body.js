@@ -47,6 +47,8 @@ export const getTotals = (operations, months) => {
   return totals;
 };
 
+const formatMoney = (amount) => amount.toLocaleString('en-US', { style: 'decimal', minimumFractionDigits: 2, maximumFractionDigits: 2 });
+
 const Body = ({
   budgetId,
   type,
@@ -72,8 +74,8 @@ const Body = ({
     <tr className={`totals totals--${type}`}>
       <td></td>
       {months.map(m => [
-        <td>{totals[m].plan}</td>,
-        <td>{totals[m].fact}</td>,
+        <td>{formatMoney(totals[m].plan)}</td>,
+        <td>{formatMoney(totals[m].fact)}</td>,
       ])}
     </tr>
     {categories.map(c => 
@@ -126,13 +128,13 @@ const Body = ({
 
               else if (operation == null)
                 return [
-                  <td className="operation-plan" onDoubleClick={() => addPlan(c.id, m)}>0</td>,
-                  <td className="operation-fact" onDoubleClick={() => addFact(c.id, m)}>0</td>
+                  <td className="operation-plan" onDoubleClick={() => addPlan(c.id, m)}>{formatMoney(0)}</td>,
+                  <td className="operation-fact" onDoubleClick={() => addFact(c.id, m)}>{formatMoney(0)}</td>
                 ];
 
               else return [
-                <td className="operation-plan" onDoubleClick={() => editPlan(operation)}>{operation.plan}</td>,
-                <td className="operation-fact" onDoubleClick={() => editFact(operation)}>{operation.fact}</td>
+                <td className="operation-plan" onDoubleClick={() => editPlan(operation)}>{formatMoney(operation.plan)}</td>,
+                <td className="operation-fact" onDoubleClick={() => editFact(operation)}>{formatMoney(operation.fact)}</td>
               ];
             })}
           </tr>
