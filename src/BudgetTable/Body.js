@@ -8,11 +8,11 @@ import AddFact from './AddFact.container';
 import {
   InitOperation,
   EditOperationModel,
-  EditPlanModel,
-  EditFactModel,
+  EditPlanModel, EditFactModel,
   InitPlan,
   InitFact
 } from '../operations';
+import './Totals.css';
 
 const sum = (s) => (operations, month) => {
 
@@ -68,7 +68,7 @@ const Body = ({
 }) => (
 
   <tbody>
-    <tr>
+    <tr className={`totals--${type}`}>
       <td></td>
       {months.map(m => [
         <td>{totals[m].plan}</td>,
