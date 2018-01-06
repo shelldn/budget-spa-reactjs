@@ -10,14 +10,14 @@ import './index.css';
 class BudgetTable extends Component {
 
   componentDidMount() {
-    const { id } = this.props.match.params;
+    const { id } = this.props;
 
     this.props.fetchCategories(id);    
     this.props.fetchOperations(id);    
   }
 
   render() {
-    const { id } = this.props.match.params;
+    const { id } = this.props;
 
     return (
       <table className="budget-table">
