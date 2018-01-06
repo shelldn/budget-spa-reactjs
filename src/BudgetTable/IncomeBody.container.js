@@ -1,4 +1,4 @@
-import Body from './Body';
+import Body, { getTotals } from './Body';
 import {
   addCategory,
   addCategoryCommit,
@@ -16,16 +16,20 @@ import {
 } from '../operations';
 import { connect } from 'react-redux';
 
-const filter = (categories) => categories
-  .filter(c => c.type === 'income' && !!c.id);
-  
-const mapStateToProps = (state) => ({
-  type: 'income',
-  months: state.months,
-  categories: filter(state.categories),
-  category: state.categories.find(c => c.type === 'income' && !c.id),
-  operations: state.operations
-});
+const mapStateToProps = (state) => {
+  const months = state.months;
+  const categories = state.categories.filter(c => c.type === 'income' && !!c.id);
+  const operations = state.operations.filter(o => categories.some(c => c.id === o.categoryId));
+
+  return {
+    type: 'income',
+    months: state.months,
+    category: state.categories.find(c => c.type === 'income' && !c.id),
+    categories,
+    operations,
+    totals: getTotals(operations, months)
+  }
+};
 
 const mapDispatchToProps = ({
   addCategory,

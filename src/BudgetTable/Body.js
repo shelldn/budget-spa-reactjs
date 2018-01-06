@@ -12,6 +12,21 @@ import {
   InitFact
 } from '../operations';
 
+export const getTotals = (operations, months) => {
+
+  const totals = {};
+
+  months.forEach(m => {
+    const monthOperations = operations.filter(o => o.month === m);
+    totals[m] = {
+      plan: monthOperations.map(o => o.plan).reduce((a, b) => a + b, 0),
+      fact: monthOperations.map(o => o.fact).reduce((a, b) => a + b, 0)
+    };
+  });
+
+  return totals;
+};
+
 const Body = ({
   budgetId,
   type,
@@ -19,6 +34,7 @@ const Body = ({
   categories,
   category,
   operations,
+  totals,
   addCategory,
   addCategoryCommit,
   editCategory,
@@ -36,8 +52,8 @@ const Body = ({
     <tr>
       <td></td>
       {months.map(m => [
-        <td>{operations.filter(o => o.month === m && categories.some(c => c.id === o.categoryId)).map(o => o.plan).reduce((a, b) => a + b, 0)}</td>,
-        <td>{operations.filter(o => o.month === m && categories.some(c => c.id === o.categoryId)).map(o => o.fact).reduce((a, b) => a + b, 0)}</td>,
+        <td>{totals[m].plan}</td>,
+        <td>{totals[m].fact}</td>,
       ])}
     </tr>
     {categories.map(c => 
