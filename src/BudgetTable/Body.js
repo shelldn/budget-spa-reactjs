@@ -14,29 +14,32 @@ import {
   InitFact
 } from '../operations';
 
-const sum = (severity) => (operations, month) => {
+const sum = (s) => (operations, month) => {
 
-  const models = {
+  const addModels = {
+    plan: InitPlan,
+    fact: InitFact
+  };
+
+  const editModels = {
     plan: EditPlanModel,
     fact: EditFactModel
   };
 
   return operations
     .filter(o => o.month === month)
-    .map(o => o[severity] instanceof models[severity] ? o[severity].value : o[severity])
+    .map(o => (o[s] instanceof addModels[s]) || (o[s] instanceof editModels[s]) ? o[s].value : o[s])
     .reduce((a, b) => a + b, 0);
 };
 
 export const getTotals = (operations, months) => {
 
   const totals = {};
-  const sumPlan = sum('plan');
-  const sumFact = sum('fact');
 
   months.forEach(m => {
     totals[m] = {
-      plan: sumPlan(operations, m),
-      fact: sumFact(operations, m)
+      plan: sum('plan')(operations, m),
+      fact: sum('fact')(operations, m)
     };
   });
 
