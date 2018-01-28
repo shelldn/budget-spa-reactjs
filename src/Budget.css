@@ -1,0 +1,26 @@
+.budget {
+  font-size: 2em;
+  margin-bottom: 30px;
+}
+
+.budget__previous,
+.budget__next {
+  text-decoration: none;
+  color: #ccc;
+}
+
+.budget__id {
+  margin: 0 .5em;
+}
+
+.budget__previous,
+.budget__next,
+.budget__id {
+  display: inline;
+  vertical-align: middle;
+}
+
+.budget__previous:hover,
+.budget__next:hover {
+  color: #444;
+}
