@@ -1,0 +1,9 @@
+.budget-table {
+  border-collapse: collapse;
+}
+
+.budget-table th,
+.budget-table td {
+  padding: .4em .7em;
+  border: 1px solid #eee;
+}

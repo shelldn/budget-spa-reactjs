@@ -1,0 +1,16 @@
+.category {
+  position: relative;
+}
+
+.category .category__edit-buttons {
+  display: none;
+  position: absolute;
+  right: 0;
+  top: 0;
+  margin-left: 1em;
+  font-size: 0.9em;
+}
+
+.category:hover .category__edit-buttons {
+  display: block;
+}
