@@ -1,9 +1,15 @@
+import { mgr } from '..';
 import { host, port } from '../config';
 
 const FETCH = 'budget-io/categories/FETCH';
 
 export const fetchCategories = (year) => async (dispatch) => {
-  const response = await fetch(`http://${host}:${port}/api/budgets/${year}/categories`);
+  const user = mgr.getUser();
+  const response = await fetch(`http://${host}:${port}/api/budgets/${year}/categories`, {
+    headers: {
+      Authorization: `Bearer ${user.access_token}`
+    }
+  });
 
   if (response.status >= 400)
     throw new Error('Failed to fetch categories');

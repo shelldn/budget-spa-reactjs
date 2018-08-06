@@ -8,6 +8,7 @@ import rootReducer from './reducer';
 import { HashRouter as Router, Route } from 'react-router-dom';
 import App from './App';
 import registerServiceWorker from './registerServiceWorker';
+import Oidc from 'oidc-client';
 import 'font-awesome/css/font-awesome.css';
 import './index.css';
 
@@ -20,6 +21,24 @@ const store = createStore(
   initialState,
   applyMiddleware(thunk, logger)
 );
+
+const config = {
+  authority: "http://localhost:5001",
+  client_id: "js",
+  redirect_uri: "http://localhost:3000/callback.html",
+  response_type: "id_token token",
+  scope: "openid profile api1",
+  post_logout_redirect_uri: "http://localhost:3000/index.html",
+};
+
+export const mgr = new Oidc.UserManager(config);
+
+mgr.getUser().then(u => {
+  if (u)
+    console.log(u);
+  else
+    mgr.signinRedirect();
+});
 
 ReactDOM.render(
   <Provider store={store}>

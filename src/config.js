@@ -1,2 +1,2 @@
-export const host = 'shelldn-ubuntu.westeurope.cloudapp.azure.com';
+export const host = 'localhost';
 export const port = 5000;
