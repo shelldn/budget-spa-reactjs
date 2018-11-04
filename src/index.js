@@ -44,6 +44,7 @@ ReactDOM.render(
   <Provider store={store}>
     <Router>
       <div>
+        <a href="#" onClick={() => mgr.signoutRedirect()}>Logout</a>
         <Route exact path="/" render={() => <Redirect to="/budgets/2018" />} />
         <Route path="/budgets/:id" component={App} />
       </div>
