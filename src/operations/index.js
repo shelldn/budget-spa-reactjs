@@ -4,7 +4,7 @@ import { host, port } from '../config';
 const FETCH = 'budget-io/operations/FETCH';
 
 export const fetchOperations = (year) => async (dispatch) => {
-  const user = mgr.getUser();
+  const user = await mgr.getUser();
   const response = await fetch(`http://${host}:${port}/api/budgets/${year}/operations`, {
     headers: {
       Authorization: `Bearer ${user.access_token}`

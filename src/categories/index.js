@@ -4,7 +4,7 @@ import { host, port } from '../config';
 const FETCH = 'budget-io/categories/FETCH';
 
 export const fetchCategories = (year) => async (dispatch) => {
-  const user = mgr.getUser();
+  const user = await mgr.getUser();
   const response = await fetch(`http://${host}:${port}/api/budgets/${year}/categories`, {
     headers: {
       Authorization: `Bearer ${user.access_token}`
@@ -26,10 +26,12 @@ export const addCategory = (type) => ({
 });
 
 export const addCategoryCommit = (budgetId, type, name) => async (dispatch) => {
+  const user = await mgr.getUser();
   const response = await fetch(`http://${host}:${port}/api/budgets/${budgetId}/categories`, {
     method: 'POST',
     headers: {
-      'Content-Type': 'application/json'
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${user.access_token}`
     },
     body: JSON.stringify({ type, name })
   });

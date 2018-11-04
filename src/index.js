@@ -5,7 +5,7 @@ import logger from 'redux-logger';
 import thunk from 'redux-thunk';
 import { Provider } from 'react-redux';
 import rootReducer from './reducer';
-import { HashRouter as Router, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom';
 import App from './App';
 import registerServiceWorker from './registerServiceWorker';
 import Oidc from 'oidc-client';
@@ -23,7 +23,7 @@ const store = createStore(
 );
 
 const config = {
-  authority: "http://localhost:5001",
+  authority: "http://172.17.0.1:5001",
   client_id: "js",
   redirect_uri: "http://localhost:3000/callback.html",
   response_type: "id_token token",
@@ -44,6 +44,7 @@ ReactDOM.render(
   <Provider store={store}>
     <Router>
       <div>
+        <Route exact path="/" render={() => <Redirect to="/budgets/2018" />} />
         <Route path="/budgets/:id" component={App} />
       </div>
     </Router>
