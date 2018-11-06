@@ -53,10 +53,12 @@ export const editCategory = (id) => ({
 });
 
 export const editCategoryCommit = (id, newName) => async (dispatch) => {
+  const user = await mgr.getUser();
   const response = await fetch(`http://${host}:${port}/api/categories/${id}`, {
     method: 'PATCH',
     headers: {
-      'Content-Type': 'application/json'
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${user.access_token}`
     },
     body: JSON.stringify({ name: newName })
   });
@@ -71,9 +73,12 @@ export const editCategoryCommit = (id, newName) => async (dispatch) => {
 };
 
 export const deleteCategory = (id) => async (dispatch) => {
-
+  const user = await mgr.getUser();
   const response = await fetch(`http://${host}:${port}/api/categories/${id}`, {
-    method: 'DELETE'
+    method: 'DELETE',
+    headers: {
+      Authorization: `Bearer ${user.access_token}`
+    }
   });
 
   if (response.status > 400)

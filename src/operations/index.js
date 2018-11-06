@@ -29,10 +29,12 @@ export const addPlan = (categoryId, month) => ({
 }); 
 
 export const addPlanCommit = (budgetId, categoryId, month, plan) => async (dispatch) => {
+  const user = await mgr.getUser();
   const response = await fetch(`http://${host}:${port}/api/budgets/${budgetId}/operations`, {
     method: 'POST',
     headers: {
-      'Content-Type': 'application/json'
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${user.access_token}`
     },
     body: JSON.stringify({ categoryId, month, plan })
   });
@@ -55,10 +57,12 @@ export const addFact = (categoryId, month) => ({
 });
 
 export const addFactCommit = (budgetId, categoryId, month, fact) => async (dispatch) => {
+  const user = await mgr.getUser();
   const response = await fetch(`http://${host}:${port}/api/budgets/${budgetId}/operations`, {
     method: 'POST',
     headers: {
-      'Content-Type': 'application/json'
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${user.access_token}`
     },
     body: JSON.stringify({ categoryId, month, fact })
   });
@@ -83,10 +87,12 @@ export const editFact = (operation) => ({
 });
 
 export const editPlanCommit = (id, plan, fact) => async (dispatch) => {
+  const user = await mgr.getUser();
   const response = await fetch(`http://${host}:${port}/api/operations/${id}`, {
     method: 'PATCH',
     headers: {
-      'Content-Type': 'application/json'
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${user.access_token}`
     },
     body: JSON.stringify({ plan, fact })
   });
@@ -103,10 +109,12 @@ export const editPlanCommit = (id, plan, fact) => async (dispatch) => {
 };
 
 export const editFactCommit = (id, plan, fact) => async (dispatch) => {
+  const user = await mgr.getUser();
   const response = await fetch(`http://${host}:${port}/api/operations/${id}`, {
     method: 'PATCH',
     headers: {
-      'Content-Type': 'application/json'
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${user.access_token}`
     },
     body: JSON.stringify({ plan, fact })
   });
